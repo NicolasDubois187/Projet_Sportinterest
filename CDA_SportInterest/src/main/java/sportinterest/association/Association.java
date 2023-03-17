@@ -2,8 +2,10 @@ package sportinterest.association;
 
 import java.util.ArrayList;
 
+
 import jakarta.persistence.*;
 import sportinterest.event.Event;
+
 import sportinterest.role.Role;
 import sportinterest.user.User;
 

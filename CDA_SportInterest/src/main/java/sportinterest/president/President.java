@@ -1,6 +1,7 @@
 package sportinterest.president;
 
 import jakarta.persistence.*;
+
 import sportinterest.role.Role;
 import sportinterest.user.User;
 

@@ -11,6 +11,7 @@ import sportinterest.report.Report;
 
 @Entity
 public class Event {
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +22,7 @@ public class Event {
 	private String adress;
 	@OneToOne
 	private Report report;
+
 
 	public Event() {
 		
@@ -34,6 +36,7 @@ public class Event {
 		this.adress = adress;
 		this.report = report;
 	}
+
 
 	public int getId() {
 		return id;

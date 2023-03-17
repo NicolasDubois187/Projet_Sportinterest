@@ -17,8 +17,7 @@ public class User {
 	private String mail;
 	private String password;
 	@ManyToMany
-	private List<Role> roles = new ArrayList<>();
-
+	private ArrayList<Role> roles = new ArrayList<>();
 
 	public User() {
 		
@@ -71,7 +70,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+  
 	public List<Role> getRoles() {
 		return roles;
 	}

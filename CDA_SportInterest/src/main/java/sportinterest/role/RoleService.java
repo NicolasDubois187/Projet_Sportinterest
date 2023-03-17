@@ -8,4 +8,8 @@ public class RoleService {
 
 	@Autowired
 	RoleRepository roleRepository;
+
+	public void addRole(Role role){
+		roleRepository.save(role);
+	}
 }
