@@ -21,6 +21,7 @@ public class Article {
 	private String description;
 	@ManyToOne
 	private Association association;
+	@ManyToOne
 	private User author;
 	
 	public Article() {

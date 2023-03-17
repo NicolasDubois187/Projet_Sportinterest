@@ -16,7 +16,6 @@ public class Report {
 	}
 	
 	public Report(int id, String name, String description) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -40,11 +39,4 @@ public class Report {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
-	/* TODO
-	 * Constructeur
-	 * Getter & Setter
-	 */
 }
