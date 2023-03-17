@@ -2,13 +2,10 @@ package sportinterest.association;
 
 import java.util.ArrayList;
 
+
+import jakarta.persistence.*;
 import sportinterest.event.Event;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+
 import sportinterest.role.Role;
 import sportinterest.user.User;
 

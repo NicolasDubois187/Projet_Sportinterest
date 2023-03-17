@@ -1,6 +1,7 @@
 package sportinterest.user;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 import sportinterest.role.Role;
@@ -16,8 +17,7 @@ public class User {
 	private String mail;
 	private String password;
 	@ManyToMany
-	private ArrayList<Role> roles;
-
+	private ArrayList<Role> roles = new ArrayList<>();
 
 	public User() {
 		
@@ -69,5 +69,13 @@ public class User {
 	
 	public void setPassword(String password) {
 		this.password = password;
+	}
+  
+	public List<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 }

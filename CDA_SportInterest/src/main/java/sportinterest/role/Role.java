@@ -45,11 +45,4 @@ public class Role {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
-	
-	/* TODO
-	 * Constructeur
-	 * Getter & Setter
-	 */
 }

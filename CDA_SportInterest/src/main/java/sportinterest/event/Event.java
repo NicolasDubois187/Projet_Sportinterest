@@ -10,7 +10,8 @@ import jakarta.persistence.OneToOne;
 import sportinterest.report.Report;
 
 @Entity
-public abstract class Event {
+public class Event {
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,16 +22,22 @@ public abstract class Event {
 	private String adress;
 	@OneToOne
 	private Report report;
-	
+
+
 	public Event() {
 		
 	}
-	
-	public Event(int id, String name) {
+
+	public Event(int id, String name, String description, Date date, String adress, Report report) {
 		this.id = id;
 		this.name = name;
+		this.description = description;
+		this.date = date;
+		this.adress = adress;
+		this.report = report;
 	}
-	
+
+
 	public int getId() {
 		return id;
 	}
@@ -69,5 +76,13 @@ public abstract class Event {
 	
 	public void setAdress(String adress) {
 		this.adress = adress;
+	}
+
+	public Report getReport() {
+		return report;
+	}
+
+	public void setReport(Report report) {
+		this.report = report;
 	}
 }
