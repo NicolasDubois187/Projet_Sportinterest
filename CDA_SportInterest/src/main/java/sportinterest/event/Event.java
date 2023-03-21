@@ -12,7 +12,6 @@ import sportinterest.report.Report;
 @Entity
 public class Event {
 
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
