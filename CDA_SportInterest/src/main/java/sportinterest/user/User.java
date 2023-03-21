@@ -17,12 +17,19 @@ public class User {
 	private String mail;
 	private String password;
 	@ManyToMany
-	private ArrayList<Role> roles = new ArrayList<>();
+	private List<Role> roles = new ArrayList<>();
 
 	public User() {
 		
 	}
-
+/**
+ * 
+ * @param id
+ * @param lastname
+ * @param firstname
+ * @param mail
+ * @param password
+ */
 	public User(int id, String lastname, String firstname, String mail, String password) {
 		this.id = id;
 		this.lastname = lastname;
