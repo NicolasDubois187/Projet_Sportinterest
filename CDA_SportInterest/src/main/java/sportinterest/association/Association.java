@@ -1,12 +1,11 @@
 package sportinterest.association;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 import jakarta.persistence.*;
 import sportinterest.event.Event;
 
-import sportinterest.role.Role;
 import sportinterest.user.User;
 
 @Entity
@@ -18,31 +17,26 @@ public class Association {
 	private String name;
 	private String description;
 	@OneToMany
-	private ArrayList<User> users;
+//	private ArrayList<User> users;
+	private List<User> users = new ArrayList<>();
 	@OneToOne
 	private User president;
 	@OneToMany
-	private ArrayList<Event> events;
+//	private ArrayList<Event> events;
+	private List<Event> events = new ArrayList<>();
 	
 	public Association() {
 		
 	}
 	
-	public Association(int id, String name) {
+	public Association(int id, String name, String description, List<User> users, User president, List<Event> events) {
+		super();
 		this.id = id;
 		this.name = name;
-	}
-
-	/*
-	 * Méthode qui retourne tout les users qui ont le role passé en paramètre
-	 */
-	public ArrayList<User> getUsersByRole(Role role){
-		
-		return null;
-	}
-	
-	public String getName() {
-		return name;
+		this.description = description;
+		this.users = users;
+		this.president = president;
+		this.events = events;
 	}
 
 	public int getId() {
@@ -53,6 +47,14 @@ public class Association {
 		this.id = id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getDescription() {
 		return description;
 	}
@@ -61,11 +63,11 @@ public class Association {
 		this.description = description;
 	}
 
-	public ArrayList<User> getUsers() {
+	public List<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(ArrayList<User> users) {
+	public void setUsers(List<User> users) {
 		this.users = users;
 	}
 
@@ -77,17 +79,12 @@ public class Association {
 		this.president = president;
 	}
 
-	public ArrayList<Event> getEvents() {
+	public List<Event> getEvents() {
 		return events;
 	}
 
-	public void setEvents(ArrayList<Event> events) {
+	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	
 }
