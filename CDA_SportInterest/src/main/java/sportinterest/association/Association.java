@@ -5,8 +5,8 @@ import java.util.List;
 
 import jakarta.persistence.*;
 import sportinterest.event.Event;
-
 import sportinterest.user.User;
+
 
 @Entity
 public class Association {
@@ -17,19 +17,19 @@ public class Association {
 	private String name;
 	private String description;
 	@OneToMany
-//	private ArrayList<User> users;
-	private List<User> users = new ArrayList<>();
+	private ArrayList<User> users;
+//	private List<User> users = new ArrayList<>();
 	@OneToOne
 	private User president;
 	@OneToMany
-//	private ArrayList<Event> events;
-	private List<Event> events = new ArrayList<>();
+	private ArrayList<Event> events;
+//	private List<Event> events = new ArrayList<>();
 	
 	public Association() {
 		
 	}
 	
-	public Association(int id, String name, String description, List<User> users, User president, List<Event> events) {
+	public Association(int id, String name, String description, ArrayList<User> users, User president, ArrayList<Event> events) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -67,7 +67,7 @@ public class Association {
 		return users;
 	}
 
-	public void setUsers(List<User> users) {
+	public void setUsers(ArrayList<User> users) {
 		this.users = users;
 	}
 
@@ -83,7 +83,7 @@ public class Association {
 		return events;
 	}
 
-	public void setEvents(List<Event> events) {
+	public void setEvents(ArrayList<Event> events) {
 		this.events = events;
 	}
 

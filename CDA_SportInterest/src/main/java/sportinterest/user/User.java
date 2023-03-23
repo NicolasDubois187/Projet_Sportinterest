@@ -17,7 +17,8 @@ public class User {
 	private String mail;
 	private String password;
 	@ManyToMany
-	private List<Role> roles = new ArrayList<>();
+	private ArrayList<Role> roles;
+//	private List<Role> roles = new ArrayList<>();
 
 	public User() {
 		
@@ -30,12 +31,13 @@ public class User {
  * @param mail
  * @param password
  */
-	public User(int id, String lastname, String firstname, String mail, String password) {
+	public User(int id, String lastname, String firstname, String mail, String password, ArrayList<Role> roles) {
 		this.id = id;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.mail = mail;
 		this.password = password;
+		this.roles = roles;
 	}
 
 	public int getId() {
@@ -82,7 +84,7 @@ public class User {
 		return roles;
 	}
 
-	public void setRoles(List<Role> roles) {
+	public void setRoles(ArrayList<Role> roles) {
 		this.roles = roles;
 	}
 }

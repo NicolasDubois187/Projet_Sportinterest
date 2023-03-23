@@ -14,7 +14,7 @@ public class President extends User {
 		super();
 	}
 	
-	public President(int id, String lastname, String firstname, String mail, String password) {
-		super(id, lastname, firstname, mail, password);
+	public President(int id, String lastname, String firstname, String mail, String password, ArrayList<Role> roles) {
+		super(id, lastname, firstname, mail, password, roles);
 	}
 }
