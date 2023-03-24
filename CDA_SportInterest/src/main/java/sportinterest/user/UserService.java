@@ -20,6 +20,7 @@ public class UserService {
 						
 		return userRepository.findAll();
 	}
+
 /**
  * add one user	
  * @param user
@@ -28,6 +29,7 @@ public class UserService {
 
 		userRepository.save(user);
 	}
+
 /**
  * get one user by his id	
  * @param id
@@ -37,6 +39,7 @@ public class UserService {
 
 		return userRepository.findById(id);
 	}
+
 /**
  * update attributes of one user
  * @param id
@@ -46,6 +49,7 @@ public class UserService {
 
 		userRepository.save(user);
 	}
+
 /**
  * Delete one user by his id	
  * @param id

@@ -21,7 +21,7 @@ public class AssociationController {
 	AssociationService associationService;
 
 /**
- * get all asociations	
+ * get all associations
  * @return
  */
     @GetMapping("associations")
@@ -37,6 +37,7 @@ public class AssociationController {
 	    
         associationService.addAssociation(newAssociation);
     }
+
 /**
  * get one association by his id    
  * @param id
@@ -53,6 +54,7 @@ public class AssociationController {
     		return ResponseEntity.ok(a);
     	}
     }
+
 /**
  * update one association by his id    
  * @param id
@@ -66,6 +68,7 @@ public class AssociationController {
     		associationService.updateAssociation(id, association);
     	}
     }
+
 /**
  * delete one association by his id    
  * @param id

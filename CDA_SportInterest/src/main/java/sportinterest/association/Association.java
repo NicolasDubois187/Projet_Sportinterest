@@ -17,13 +17,11 @@ public class Association {
 	private String name;
 	private String description;
 	@OneToMany
-	private ArrayList<User> users;
-//	private List<User> users = new ArrayList<>();
+	private List<User> users = new ArrayList<>();
 	@OneToOne
 	private User president;
 	@OneToMany
-	private ArrayList<Event> events;
-//	private List<Event> events = new ArrayList<>();
+	private List<Event> events = new ArrayList<>();
 	
 	public Association() {
 		

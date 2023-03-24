@@ -27,6 +27,7 @@ public class UserController {
     public List<User> getUsers(){
         return userService.getUsers();
     }
+
 /**
  * add one user
  * @param newUser
@@ -36,6 +37,7 @@ public class UserController {
 				    
         userService.addUser(newUser);
     }
+
 /**
  * get one user by his id    
  * @param id
@@ -52,6 +54,7 @@ public class UserController {
     		return ResponseEntity.ok(u);
     	}
     }
+
 /**
  * update one user by his id    
  * @param id
@@ -65,6 +68,7 @@ public class UserController {
     	userService.updateUser(id, user);
     	}
     }
+
 /**
  * delete one user by his id    
  * @param id
