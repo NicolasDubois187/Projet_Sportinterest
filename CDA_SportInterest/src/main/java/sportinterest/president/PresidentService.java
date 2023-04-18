@@ -21,6 +21,7 @@ public class PresidentService {
 							
 		return presidentRepository.findAll();
 	}
+
 /**
  * add one president	
  * @param president
@@ -29,6 +30,7 @@ public class PresidentService {
 
 		presidentRepository.save(president);
 	}
+
 /**
  * get one president by his id	
  * @param id
@@ -38,6 +40,7 @@ public class PresidentService {
 
 		return presidentRepository.findById(id);
 	}
+
 /**
  * update attributes of one president
  * @param id
@@ -47,6 +50,7 @@ public class PresidentService {
 
 		presidentRepository.save(president);
 	}
+
 /**
  * Delete one president by his id	
  * @param id

@@ -21,6 +21,7 @@ public class AssociationService {
 			
 		return associationRepository.findAll();
 	}
+
 /**
  * add one association	
  * @param association
@@ -29,6 +30,7 @@ public class AssociationService {
 
 		associationRepository.save(association);
 	}
+
 /**
  * get one association by his id	
  * @param id
@@ -38,6 +40,7 @@ public class AssociationService {
 
 		return associationRepository.findById(id);
 	}
+
 /**
  * update attributes of one association
  * @param id
@@ -47,6 +50,7 @@ public class AssociationService {
 
 		associationRepository.save(association);
 	}
+
 /**
  * Delete one association by his id	
  * @param id
@@ -54,6 +58,5 @@ public class AssociationService {
 	public void deleteAssociation(Integer id) {
 
 		associationRepository.deleteById(id);
-	}	
-	
+	}
 }

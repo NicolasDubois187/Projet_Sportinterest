@@ -28,6 +28,7 @@ public class PresidentController {
     public List<President> getPresidents(){
         return presidentService.getPresidents();
     }
+
 /**
  * add one president
  * @param newPresident
@@ -37,6 +38,7 @@ public class PresidentController {
 					    
         presidentService.addPresident(newPresident);
     }
+
 /**
  * get one president by his id    
  * @param id
@@ -53,6 +55,7 @@ public class PresidentController {
     		return ResponseEntity.ok(p);
     	}
     }
+
 /**
  * update one president by his id    
  * @param id
@@ -66,6 +69,7 @@ public class PresidentController {
     	presidentService.updatePresident(id, president);
     	}
     }
+
 /**
  * delete one president by his id    
  * @param id
@@ -74,4 +78,9 @@ public class PresidentController {
     public void deletePresident(@PathVariable("id") Integer id) {
     	presidentService.deletePresident(id);
     }
+
+    /**
+     * Créer méthodes qui permettent à un président d'ajouter / supprimer des roles (List<Role>) à un utilisateur de son association
+     * ( ! attention au NullPointerException )
+     */
 }

@@ -28,6 +28,7 @@ public class EventController {
     public List<Event> getEvents(){
         return eventService.getEvents();
     }
+
 /**
  * add one event
  * @param newEvent
@@ -37,6 +38,7 @@ public class EventController {
 		    
         eventService.addEvent(newEvent);
     }
+
 /**
  * get one event by his id    
  * @param id
@@ -53,6 +55,7 @@ public class EventController {
     		return ResponseEntity.ok(e);
     	}
     }
+
 /**
  * update one event by his id    
  * @param id
@@ -66,6 +69,7 @@ public class EventController {
     	eventService.updateEvent(id, event);
     	}
     }
+
 /**
  * delete one event by his id    
  * @param id

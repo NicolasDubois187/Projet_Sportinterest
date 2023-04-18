@@ -21,6 +21,7 @@ public class EventService {
 				
 		return eventRepository.findAll();
 	}
+
 /**
  * add one event	
  * @param event
@@ -29,6 +30,7 @@ public class EventService {
 
 		eventRepository.save(event);
 	}
+
 /**
  * get one event by his id	
  * @param id
@@ -38,6 +40,7 @@ public class EventService {
 
 		return eventRepository.findById(id);
 	}
+
 /**
  * update attributes of one event
  * @param id
@@ -47,6 +50,7 @@ public class EventService {
 
 		eventRepository.save(event);
 	}
+
 /**
  * Delete one event by his id	
  * @param id
