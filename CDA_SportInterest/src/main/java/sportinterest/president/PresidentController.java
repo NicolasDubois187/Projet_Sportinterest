@@ -61,7 +61,7 @@ public class PresidentController {
  * @param id
  * @param president
  */
-    @PutMapping("users/{id}")
+    @PutMapping("presidents/{id}")
     public void updatePresident(@PathVariable("id") Integer id, @RequestBody President president) {
     	Optional<President> oPresident = presidentService.getOnePresident(id);
     	if(oPresident.isPresent()) {

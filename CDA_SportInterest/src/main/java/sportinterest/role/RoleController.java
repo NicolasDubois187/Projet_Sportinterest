@@ -35,7 +35,7 @@ public class RoleController {
  * @param newRole
  */
 	@PostMapping("roles")
-	public void postRole(Role newRole){
+	public void postRole(@RequestBody Role newRole){
 		
 		roleService.addRole(newRole);
 	}
