@@ -5,5 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PresidentRepository extends JpaRepository<President, Integer>{
+	
 
 }

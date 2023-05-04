@@ -1,11 +1,7 @@
 package sportinterest.association;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jakarta.persistence.*;
-import sportinterest.event.Event;
-import sportinterest.user.User;
+import sportinterest.president.President;
 
 
 @Entity
@@ -16,25 +12,17 @@ public class Association {
 	private int id;
 	private String name;
 	private String description;
-	@OneToMany
-	private List<User> users = new ArrayList<>();
-	@OneToOne
-	private User president;
-	@OneToMany
-	private List<Event> events = new ArrayList<>();
 	
 	public Association() {
 		
 	}
 	
-	public Association(int id, String name, String description, ArrayList<User> users, User president, ArrayList<Event> events) {
+	public Association(int id, String name, String description) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.users = users;
-		this.president = president;
-		this.events = events;
+	
 	}
 
 	public int getId() {
@@ -61,28 +49,7 @@ public class Association {
 		this.description = description;
 	}
 
-	public List<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(ArrayList<User> users) {
-		this.users = users;
-	}
-
-	public User getPresident() {
-		return president;
-	}
-
-	public void setPresident(User president) {
-		this.president = president;
-	}
-
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(ArrayList<Event> events) {
-		this.events = events;
-	}
+	
+	
 
 }

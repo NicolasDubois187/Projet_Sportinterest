@@ -2,12 +2,17 @@ package sportinterest.event;
 
 import java.sql.Date;
 
+
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import sportinterest.report.Report;
+import jakarta.persistence.ManyToOne;
+
+import sportinterest.association.Association;
+
+
 
 @Entity
 public class Event {
@@ -19,21 +24,21 @@ public class Event {
 	private String description;
 	private Date date;
 	private String adress;
-	@OneToOne
-	private Report report;
-
-
+	@ManyToOne
+	private Association association;
+	
+    
 	public Event() {
 		
 	}
 
-	public Event(int id, String name, String description, Date date, String adress, Report report) {
+	public Event(int id, String name, String description, Date date, String adress, Association association) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.date = date;
 		this.adress = adress;
-		this.report = report;
+		this.association = association;
 	}
 
 
@@ -65,8 +70,8 @@ public class Event {
 		return date;
 	}
 	
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(Date eventDate) {
+		this.date = eventDate;
 	}
 	
 	public String getAdress() {
@@ -77,11 +82,13 @@ public class Event {
 		this.adress = adress;
 	}
 
-	public Report getReport() {
-		return report;
+	public Association getAssociation() {
+		return association;
 	}
 
-	public void setReport(Report report) {
-		this.report = report;
+	public void setAssociation(Association association) {
+		this.association = association;
 	}
+
+
 }

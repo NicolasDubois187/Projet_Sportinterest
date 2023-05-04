@@ -1,10 +1,13 @@
 package sportinterest.event;
 
+
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
 
 
 @Service
@@ -13,6 +16,7 @@ public class EventService {
 	@Autowired
 	EventRepository eventRepository;
 	
+
 /**
  * 
  * @return all events
@@ -58,7 +62,9 @@ public class EventService {
 	public void deleteEvent(Integer id) {
 
 		eventRepository.deleteById(id);
-	}	
+	}
+	
+  
 		
 }
 
