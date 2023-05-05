@@ -20,6 +20,7 @@ public class ReportController {
 	@Autowired
 	ReportService reportService;
 	
+	
 /**
  * get all reports	
  * @return
@@ -36,6 +37,8 @@ public class ReportController {
     public void postReport(@RequestBody Report newReport){
 			    
         reportService.addReport(newReport);
+        reportService.createOrUpdateEventReport(newReport.getEvent(), newReport);
+        
     }
 /**
  * get one report by his id    
