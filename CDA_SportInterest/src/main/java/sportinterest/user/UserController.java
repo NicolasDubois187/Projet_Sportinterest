@@ -77,4 +77,22 @@ public class UserController {
     public void deleteUser(@PathVariable("id") Integer id) {
     	userService.deleteUser(id);
     }
+    
+    @PostMapping("connection")
+    public boolean loginUser(@RequestBody User user) {
+    	String mail = user.getMail();
+    	String password = user.getPassword();
+    	
+        // Verify if mail exist
+        Optional<User> existingUser = userService.getOneUserByMail(mail);
+        if(!existingUser.isPresent()) {
+            return false;
+        }
+        
+        // Verify if mail match with password
+        if(!existingUser.get().getPassword().equals(password)) {
+           return false;
+        }
+		return true;
+    }
 }

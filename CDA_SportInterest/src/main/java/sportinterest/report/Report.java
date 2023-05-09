@@ -1,7 +1,7 @@
 package sportinterest.report;
 
 import jakarta.persistence.*;
-import sportinterest.event.Event;
+
 
 @Entity
 public class Report {
@@ -11,18 +11,17 @@ public class Report {
 	private int id;
 	private String name;
 	private String description;
-    @OneToOne
-	private Event event;
+
 	
 	public Report() {
 		
 	}
 	
-	public Report(int id, String name, String description, Event event) {
+	public Report(int id, String name, String description) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.event = event;
+
 	}
 	
 	public int getId() {
@@ -44,12 +43,5 @@ public class Report {
 		this.description = description;
 	}
 
-	public Event getEvent() {
-		return event;
-	}
-
-	public void setEvent(Event event) {
-		this.event = event;
-	}
 	
 }

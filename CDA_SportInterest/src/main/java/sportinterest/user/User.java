@@ -2,9 +2,6 @@ package sportinterest.user;
 
 import java.util.ArrayList;
 import java.util.List;
-
-
-
 import jakarta.persistence.*;
 import sportinterest.association.Association;
 import sportinterest.role.Role;

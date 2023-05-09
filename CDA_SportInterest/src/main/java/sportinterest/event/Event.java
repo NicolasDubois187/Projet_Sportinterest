@@ -11,8 +11,6 @@ import jakarta.persistence.OneToOne;
 import sportinterest.association.Association;
 import sportinterest.report.Report;
 
-
-
 @Entity
 public class Event {
 
@@ -98,7 +96,5 @@ public class Event {
 		this.report = report;
 	}
 	
-	
-
 
 }

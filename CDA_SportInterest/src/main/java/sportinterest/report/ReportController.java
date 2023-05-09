@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import sportinterest.event.EventService;
+
 
 @RestController
 public class ReportController {
@@ -20,6 +22,9 @@ public class ReportController {
 	@Autowired
 	ReportService reportService;
 	
+	@Autowired
+	EventService eventService;
+		
 	
 /**
  * get all reports	
@@ -33,11 +38,11 @@ public class ReportController {
  * add one report
  * @param newReport
  */
-    @PostMapping("reports")
-    public void postReport(@RequestBody Report newReport){
-			    
+    @PostMapping("reports/{id}") //Id de l' event
+    public void postReport(@PathVariable("id") Integer id, @RequestBody Report newReport){
+		
+    	eventService.setReportById(id, newReport);
         reportService.addReport(newReport);
-        reportService.createOrUpdateEventReport(newReport.getEvent(), newReport);
         
     }
 /**

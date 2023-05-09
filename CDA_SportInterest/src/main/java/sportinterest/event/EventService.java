@@ -3,9 +3,11 @@ package sportinterest.event;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import sportinterest.report.Report;
+
 
 
 @Service
@@ -18,9 +20,12 @@ public class EventService {
  * 
  * @return all events
  */
+	
 	public List<Event> getEvents() {
 				
 		return eventRepository.findAll();
+		
+
 	}
 
 /**
@@ -59,6 +64,16 @@ public class EventService {
 	public void deleteEvent(Integer id) {
 
 		eventRepository.deleteById(id);
+	}
+	
+	public void setReportById(int id, Report report) {
+		try {
+			Event event = eventRepository.getById(id);
+			event.setReport(report);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

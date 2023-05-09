@@ -39,6 +39,16 @@ public class UserService {
 
 		return userRepository.findById(id);
 	}
+	
+/**
+ * get one user by his mail	
+ * @param mail
+ * @return
+ */
+	public Optional<User> getOneUserByMail(String mail) {
+	
+		return userRepository.findByMail(mail);
+	}
 
 /**
  * update attributes of one user

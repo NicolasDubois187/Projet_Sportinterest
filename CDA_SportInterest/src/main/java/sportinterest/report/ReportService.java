@@ -5,9 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import sportinterest.event.Event;
 import sportinterest.event.EventRepository;
 
 
@@ -25,6 +23,7 @@ public class ReportService {
  * 
  * @return all reports
  */
+	
 	public List<Report> getReports() {
 					
 		return reportRepository.findAll();
@@ -69,22 +68,22 @@ public class ReportService {
  * @param event
  * @param report
  */		
-	@Transactional
-	public void createOrUpdateEventReport(Event event, Report report) {
-	    Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
-	    if (existingEvent != null) {
-	        Report existingReport = existingEvent.getReport();
-	        if (existingReport != null) {
-	            // Mise à jour du rapport existant
-	            existingReport.setName(report.getName());
-	            existingReport.setDescription(report.getDescription());
-	            reportRepository.save(existingReport);
-	        } else {
-	            // Création d'un nouveau rapport
-	            reportRepository.save(report);
-	            existingEvent.setReport(report);
-	            eventRepository.save(existingEvent);
-	        }
-	    }
-	}
+//	@Transactional
+//	public void createOrUpdateEventReport(Event event, Report report) {
+//	    Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
+//	    if (existingEvent != null) {
+//	        Report existingReport = existingEvent.getReport();
+//	        if (existingReport != null) {
+//	            // update existing report
+//	            existingReport.setName(report.getName());
+//	            existingReport.setDescription(report.getDescription());
+//	            reportRepository.save(existingReport);
+//	        } else {
+//	            // Create new report
+//	            reportRepository.save(report);
+//	            existingEvent.setReport(report);
+//	            eventRepository.save(existingEvent);
+//	        }
+//	    }
+//	}
 }
