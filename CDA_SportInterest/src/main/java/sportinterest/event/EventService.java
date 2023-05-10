@@ -48,6 +48,16 @@ public class EventService {
 	}
 
 /**
+ * get events by restricted type	
+ * @param restricted
+ * @return
+ */
+	public List<Event> getEventByRestrictedAndAssociationId(Boolean restricted, Integer id) {
+	
+		return eventRepository.findByRestrictedAndAssociationId(restricted, id);
+	}
+
+/**
  * update attributes of one event
  * @param id
  * @param event

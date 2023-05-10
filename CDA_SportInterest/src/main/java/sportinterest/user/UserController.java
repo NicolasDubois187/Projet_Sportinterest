@@ -33,10 +33,15 @@ public class UserController {
  * @param newUser
  */
     @PostMapping("users")
-    public void postUser(@RequestBody User newUser){
-				    
-        userService.addUser(newUser);
-    }
+    public boolean postUser(@RequestBody User newUser){
+		Optional<User> oUser = userService.getOneUserByMail(newUser.getMail());
+		if (oUser.isPresent()) {
+			return false;
+		} else {
+			userService.addUser(newUser);	
+			return true;
+		}
+	}
 
 /**
  * get one user by his id    

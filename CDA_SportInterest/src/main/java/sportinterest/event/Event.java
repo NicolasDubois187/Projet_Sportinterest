@@ -2,6 +2,7 @@ package sportinterest.event;
 
 import java.sql.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +22,8 @@ public class Event {
 	private String description;
 	private Date date;
 	private String adress;
+	@Column(name = "restricted", columnDefinition = "BOOLEAN")
+	private Boolean restricted;
 	@ManyToOne
 	private Association association;
     @OneToOne
@@ -30,12 +33,13 @@ public class Event {
 		
 	}
 
-	public Event(int id, String name, String description, Date date, String adress, Association association) {
+	public Event(int id, String name, String description, Date date, String adress, Boolean restricted, Association association) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.date = date;
 		this.adress = adress;
+		this.restricted = restricted;
 		this.association = association;
 	}
 
@@ -78,6 +82,15 @@ public class Event {
 	
 	public void setAdress(String adress) {
 		this.adress = adress;
+	}
+	
+
+	public Boolean isRestricted() {
+		return restricted;
+	}
+
+	public void setRestricted(Boolean restricted) {
+		this.restricted = restricted;
 	}
 
 	public Association getAssociation() {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -54,6 +55,21 @@ public class EventController {
     		Event e = oEvent.get();
     		return ResponseEntity.ok(e);
     	}
+    }
+    
+/**
+* get one event by restricted type    
+* @param restricted
+* @param associationId
+* @return
+*/
+    @GetMapping("restricted/{id}")
+    public List<Event> getEventByRestrictedAndAssociationId(@RequestParam(value = "restricted", defaultValue = "false") Boolean restricted, @PathVariable("id") Integer id) {
+        List<Event> events = eventService.getEventByRestrictedAndAssociationId(restricted, id);
+        if (events.isEmpty()) {
+           // /!\ CAS D'ERREUR //
+        }
+        return events;
     }
 
 /**
