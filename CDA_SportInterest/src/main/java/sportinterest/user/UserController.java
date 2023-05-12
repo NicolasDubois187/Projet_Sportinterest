@@ -2,6 +2,7 @@ package sportinterest.user;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -19,6 +21,7 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
+	
 /**
  * get all users	
  * @return
@@ -28,6 +31,38 @@ public class UserController {
         return userService.getUsers();
     }
 
+/**
+ * get all users by association id	
+ * @return
+ */
+     @GetMapping("users/association/{id}")
+     public List<User> getUsersByAssociationId(@PathVariable("id") Integer id){
+           return userService.getUsersByAssociationId(id);
+     }
+     
+/**
+ * get all users by roles id	
+ * @return
+ */
+     @GetMapping("users/roles/{id}")
+     public List<User> getUsersByRoleId(@PathVariable("id") Integer id){
+    	 return userService.getUsersByRoleId(id);
+     }
+     
+/**
+ * get all users by association id and roles id	
+ * @return
+ */
+     @GetMapping("users/association/roles")
+     public List<User> getUsersByRoleIdAndAssociationId(@RequestParam("roleId") Integer roleId, @RequestParam("associationId") Integer associationId) {
+         List<User> usersByAssociationId = userService.getUsersByAssociationId(associationId);
+         List<User> usersByRoleId = userService.getUsersByRoleId(roleId);
+         
+         return usersByAssociationId.stream()
+                 .filter(usersByRoleId::contains)
+                 .collect(Collectors.toList());
+     }
+     
 /**
  * add one user
  * @param newUser

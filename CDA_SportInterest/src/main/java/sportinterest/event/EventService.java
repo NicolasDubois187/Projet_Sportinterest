@@ -50,6 +50,7 @@ public class EventService {
 /**
  * get events by restricted type	
  * @param restricted
+ * @param association id
  * @return
  */
 	public List<Event> getEventByRestrictedAndAssociationId(Boolean restricted, Integer id) {
