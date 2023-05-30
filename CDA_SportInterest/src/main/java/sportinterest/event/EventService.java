@@ -4,6 +4,7 @@ package sportinterest.event;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import sportinterest.report.Report;
@@ -23,10 +24,9 @@ public class EventService {
 	
 	public List<Event> getEvents() {
 				
-		return eventRepository.findAll();
-		
-
+		return eventRepository.findAll();	
 	}
+	
 
 /**
  * add one event	
@@ -77,6 +77,12 @@ public class EventService {
 		eventRepository.deleteById(id);
 	}
 	
+/**
+ * Set report_id by event_id	
+ * @param event_id
+ * @param report
+ */
+	
 	public void setReportById(int id, Report report) {
 		try {
 			Event event = eventRepository.getById(id);
@@ -86,6 +92,54 @@ public class EventService {
 		}
 		
 	}
+
+/**
+ * get all events order by date ASC
+ * @param Pageable limit display
+ */
+	public List<Event> getAllByOrderByDateAsc(Pageable pageable) {
+		
+		return eventRepository.findAllByOrderByDateAsc(pageable);
+	
+	}
+
+/**
+ * get all events by association id order by date ASC
+ * @param Pageable limit display
+ * @param association id
+ */
+	public List<Event> getAllByAssociationIdOrderByDateAsc(Integer id, Pageable unpaged) {
+
+
+		return eventRepository.findAllByAssociationIdOrderByDateAsc(id, unpaged);
+	}
+	
+/**
+ * get all events by report_id isNull
+ * @return
+ */
+	public List<Event> getAllEventByReportIdNull() {
+		
+		return eventRepository.findAllEventByReportIsNull();
+	}
+	
+/**
+ * get all events by report_id isNotNull
+ * @return
+ */
+	public List<Event> getAllEventByReportIdNotNull() {
+		
+		return eventRepository.findAllEventByReportIsNotNull();
+	}
+
+/**
+ * get all events by restricted is false
+ * @return
+ */	
+	public List<Event> findAllByRestrictedFalse() {
+		
+		return eventRepository.findAllEventByRestrictedIsFalse();
+}
 	
 }
 

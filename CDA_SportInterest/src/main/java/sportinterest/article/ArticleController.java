@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import sportinterest.user.User;
+
 
 
 @RestController
@@ -29,6 +31,17 @@ public class ArticleController {
     public List<Article> getArticles(){
         return articleService.getArticles();
     }
+    
+/**
+ * get all articles by association id	
+ * @return
+ * @param association id
+ */
+   @GetMapping("articles/association/{id}")
+    public List<Article> getArticlesByAssociationId(@PathVariable("id") Integer id){
+         return articleService.getArticlesByAssociationId(id);
+    }
+   
 /**
  * add one article
  * @param newArticle
