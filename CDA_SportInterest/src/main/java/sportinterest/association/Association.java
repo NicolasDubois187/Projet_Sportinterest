@@ -2,7 +2,6 @@ package sportinterest.association;
 
 import jakarta.persistence.*;
 
-import sportinterest.user.User;
 
 
 @Entity
@@ -13,8 +12,6 @@ public class Association {
 	private int id;
 	private String name;
 	private String description;
-	@OneToOne
-	private User president;
 	
 	public Association() {
 		
@@ -50,14 +47,6 @@ public class Association {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public User getPresident() {
-		return president;
-	}
-
-	public void setPresident(User president) {
-		this.president = president;
 	}
 
 	

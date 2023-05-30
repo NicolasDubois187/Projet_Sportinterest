@@ -20,7 +20,27 @@ public class UserService {
 						
 		return userRepository.findAll();
 	}
-
+	
+/**
+ * get all users by association id	
+ * @param association id
+ * @return
+ */
+	public List<User> getUsersByAssociationId(Integer id) {
+		
+		return userRepository.findUsersByAssociationId(id);
+	}
+	
+/**
+ * get all users by role id	
+ * @param role id
+ * @return
+ */
+	public List<User> getUsersByRoleId(Integer id) {
+		
+		return userRepository.findUsersByRolesId(id);
+	}
+		
 /**
  * add one user	
  * @param user

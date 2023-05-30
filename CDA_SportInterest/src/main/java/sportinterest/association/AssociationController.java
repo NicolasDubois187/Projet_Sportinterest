@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import sportinterest.user.UserService;
+
 
 @RestController
 public class AssociationController {
 
 	@Autowired
 	AssociationService associationService;
+	
+	@Autowired
+	UserService userService;
 
 /**
  * get all associations
@@ -64,11 +69,11 @@ public class AssociationController {
     public void updateAssociation(@PathVariable("id") Integer id, @RequestBody Association association) {
     	Optional<Association> oAssociation = associationService.getOneAssociation(id);
     	if(oAssociation.isPresent()) {
-	    		
+    
     		associationService.updateAssociation(id, association);
+    	
     	}
     }
-
 /**
  * delete one association by his id    
  * @param id

@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import sportinterest.user.User;
+
 
 @Service
 public class ArticleService {
@@ -21,6 +23,17 @@ public class ArticleService {
 		
 		return articleRepository.findAll();
 	}
+	
+/**
+ * get all articles by association id	
+ * @param association id
+ * @return
+ */
+	public List<Article> getArticlesByAssociationId(Integer id) {
+			
+			return articleRepository.findArticlesByAssociationId(id);
+	}
+	
 /**
  * add one article	
  * @param article

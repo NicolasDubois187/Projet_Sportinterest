@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +28,71 @@ public class EventController {
  * get all events	
  * @return
  */
-    @GetMapping("events")
-    public List<Event> getEvents(){
-        return eventService.getEvents();
-    }
-
+//    @GetMapping("events")
+//    public List<Event> getEvents(){
+//        return eventService.getEvents();
+//    }
+    
+/**
+ * get all events order by date ASC and optional limit
+ * @return
+ * @param limit
+ */
+	@GetMapping("events")
+	public List<Event> getEvents(@RequestParam(required = false) Integer limit) {
+		if (limit == null) {
+			return eventService.getAllByOrderByDateAsc(null);
+		} else {
+			Pageable pageable = PageRequest.of(0, limit, Sort.by("date").ascending());
+			return eventService.getAllByOrderByDateAsc(pageable);
+		}
+	}
+	
+/**
+ * get all events by association id order by date ASC and optional limit
+ * @return
+ * @param limit
+ * @param association id
+ */	
+	@GetMapping("events/association/{id}")
+	public List<Event> getEventsByAssociationId(
+	        @PathVariable Integer id,
+	        @RequestParam(required = false) Integer limit) {
+	    if (limit == null) {
+	        return eventService.getAllByAssociationIdOrderByDateAsc(id, Pageable.unpaged());
+	    } else {
+	        Pageable pageable = PageRequest.of(0, limit, Sort.by("date").ascending());
+	        return eventService.getAllByAssociationIdOrderByDateAsc(id, pageable);
+	    }
+	}
+	
+/**
+ * get all events by report_id isNull
+ * @return
+ */	
+	@GetMapping("events/not-report")
+	public List<Event> getEventsByReportIdIsNull() {
+		return eventService.getAllEventByReportIdNull();
+	}
+	
+/**
+ * get all events by report_id isNotNull
+ * @return
+ */	
+	@GetMapping("events/report-ok")
+	public List<Event> getEventsByReportIdIsNotNull() {
+		return eventService.getAllEventByReportIdNotNull();
+	}
+	
+/**
+ * get all events by restricted is false
+ * @return
+ */
+	@GetMapping("/events/not-restricted")
+	public List<Event> getEventsNotRestricted() {
+	    return eventService.findAllByRestrictedFalse();
+	}
+	
 /**
  * add one event
  * @param newEvent
