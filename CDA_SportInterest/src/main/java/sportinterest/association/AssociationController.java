@@ -13,17 +13,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import sportinterest.user.UserService;
-
 
 @RestController
 public class AssociationController {
 
 	@Autowired
 	AssociationService associationService;
-	
-	@Autowired
-	UserService userService;
 
 /**
  * get all associations
