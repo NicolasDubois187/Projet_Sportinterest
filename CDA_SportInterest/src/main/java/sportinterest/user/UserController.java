@@ -44,30 +44,6 @@ public class UserController {
      }
      
 /**
- * get all users by roles id	
- * @return
- * @param role id
- */
-     @GetMapping("users/roles/{id}")
-     public List<User> getUsersByRoleId(@PathVariable("id") Integer id){
-    	 return userService.getUsersByRoleId(id);
-     }
-     
-/**
- * get all users by association id and roles id	
- * @return
- */
-     @GetMapping("users/association/roles")
-     public List<User> getUsersByRoleIdAndAssociationId(@RequestParam("roleId") Integer roleId, @RequestParam("associationId") Integer associationId) {
-         List<User> usersByAssociationId = userService.getUsersByAssociationId(associationId);
-         List<User> usersByRoleId = userService.getUsersByRoleId(roleId);
-         
-         return usersByAssociationId.stream()
-                 .filter(usersByRoleId::contains)
-                 .collect(Collectors.toList());
-     }
-     
-/**
  * add one user
  * @param newUser
  */
