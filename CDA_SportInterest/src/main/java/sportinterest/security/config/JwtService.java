@@ -8,9 +8,12 @@ import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import sportinterest.user.ERole;
+import sportinterest.user.User;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -19,6 +22,10 @@ public class JwtService {
 
     @Value("${jwt.secretkey}")
     private String SECRET_KEY;
+    @Value("${jwt.expiration}")
+    private long jwtExpiration;
+    @Value("${jwt.refreshtoken.expiration}")
+    private long refreshExpiration;
 
     /***
      * Extracts the mail from the token
@@ -42,28 +49,48 @@ public class JwtService {
     }
 
     /***
-     * Generates a token from the claims
-     * @param userDetails
-     * @return  the token
+     * Generates a key from the secret key
+     * @return  the key
      */
     public String generateToken(UserDetails userDetails) {
-        return generateToken(Map.of(), userDetails);
+        return generateToken(new HashMap<>(), userDetails);
     }
 
     /***
-     * Generates a token from the claims
+     * Generates a token
      * @param extraClaims
      * @param userDetails
      * @return  the token
      */
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return Jwts.builder()                                                               //Creates a new token
-                .setClaims(extraClaims)                                                     //Sets the claims
-                .setSubject(userDetails.getUsername())                                      //Sets the subject of the token
-                .setIssuedAt(new Date(System.currentTimeMillis()))                          //Sets the time of creation
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 *60 * 24))   // 24 hours
-                .signWith(getSignInKey(), SignatureAlgorithm.HS256)                         //Signs the token
-                .compact();                                                                 //Builds the token
+        return buildToken(extraClaims, userDetails, jwtExpiration);                                                             //Builds the token
+    }
+
+    /***
+     * Generates a refresh token
+     * @param userDetails
+     * @return  the refresh token
+     */
+    public String generateRefreshToken(UserDetails userDetails) {
+        return buildToken(new HashMap<>(), userDetails, refreshExpiration);                                                             //Builds the token
+    }
+
+    /***
+     * Generates a token
+     * @param extraClaims
+     * @param userDetails
+     * @param expiration
+     * @return  the token
+     */
+    public String buildToken(Map <String, Object> extraClaims, UserDetails userDetails, long expiration) {
+        return Jwts
+                .builder()
+                .setClaims(extraClaims)
+                .setSubject(userDetails.getUsername())                              //Sets the subject to the mail
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     /***
