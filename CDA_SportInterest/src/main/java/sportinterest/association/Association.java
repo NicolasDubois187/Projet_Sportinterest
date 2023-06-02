@@ -12,6 +12,7 @@ public class Association {
 	private int id;
 	private String name;
 	private String description;
+	private int presidentId;
 	
 	public Association() {
 		

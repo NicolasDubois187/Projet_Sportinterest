@@ -24,7 +24,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
 
     /***
-     * This method is used to filter the request and check if the token is valid
+     * Filter the request and check if the token is valid
      * If the token is valid, the user is authenticated
      * If there is no token or the token is invalid, the user is not authenticated
      * @param request
@@ -50,17 +50,20 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
+
         jwt = authHeader.substring(7);      //Remove "Bearer " from the token
         mail = jwtService.extractMail(jwt);
 
-        if (mail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+        if (mail != null /*&& SecurityContextHolder.getContext().getAuthentication() == null*/) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(mail);
             if (jwtService.isTokenValid(jwt, userDetails)) {
+                System.out.println(userDetails.getAuthorities());
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
                         userDetails.getAuthorities()
                 );
+                var test = userDetails.getAuthorities();
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authToken);
