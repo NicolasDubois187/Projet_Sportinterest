@@ -1,13 +1,23 @@
 package sportinterest.user;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import sportinterest.association.Association;
-import sportinterest.role.Role;
 
+@Data					// Replace Getter, Setter, ToString, EqualsAndHashCode, RequiredArgsConstructor
+@Builder				// Replace Constructor
+@NoArgsConstructor		// Constructor without arguments
+@AllArgsConstructor		// Constructor with all arguments
 @Entity
-public class User {
+public class User implements UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,76 +28,36 @@ public class User {
 	private String password;
 	@ManyToOne
 	private Association association;
-	@ManyToMany
-	protected List<Role> roles = new ArrayList<>();
+	@Enumerated(EnumType.STRING)
+	private ERole role;
 
-	public User() {
-		
-	}
-
-	public User(int id, String lastname, String firstname, String mail, String password, Association association, List<Role> roles) {
-		this.id = id;
-		this.lastname = lastname;
-		this.firstname = firstname;
-		this.mail = mail;
-		this.password = password;
-		this.association = association;
-		this.roles = roles;
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of(new SimpleGrantedAuthority(role.name()));
 	}
 
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public String getLastname() {
-		return lastname;
-	}
-	
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
-	}
-	
-	public String getFirstname() {
-		return firstname;
-	}
-	
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
-	}
-	
-	public String getMail() {
+	@Override
+	public String getUsername() {
 		return mail;
 	}
-	
-	public void setMail(String mail) {
-		this.mail = mail;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public Association getAssociation() {
-		return association;
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
 	}
 
-	public void setAssociation(Association association) {
-		this.association = association;
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
 	}
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
+	@Override
+	public boolean isEnabled() {
+		return true;
 	}
 }
