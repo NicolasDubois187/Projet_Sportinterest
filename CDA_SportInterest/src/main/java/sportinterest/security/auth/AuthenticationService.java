@@ -13,7 +13,7 @@ import sportinterest.security.config.JwtService;
 import sportinterest.security.token.Token;
 import sportinterest.security.token.TokenRepository;
 import sportinterest.user.ERole;
-import sportinterest.user.User;
+import sportinterest.article.User;
 import sportinterest.user.UserRepository;
 
 import java.io.IOException;
