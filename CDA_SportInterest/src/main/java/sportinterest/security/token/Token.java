@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sportinterest.user.User;
+import sportinterest.article.User;
 
 @Data
 @Builder

@@ -5,7 +5,6 @@ import java.sql.Date;
 import jakarta.persistence.*;
 
 import sportinterest.association.Association;
-import sportinterest.user.User;
 
 @Entity
 public class Article {
