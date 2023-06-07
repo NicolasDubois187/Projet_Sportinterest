@@ -53,7 +53,7 @@ public class EventService {
  * @param association id
  * @return
  */
-	public List<Event> getEventByRestrictedAndAssociationId(Boolean restricted, Integer id) {
+	public List<Event> getEventsByRestrictedAndAssociationId(Boolean restricted, Integer id) {
 	
 		return eventRepository.findByRestrictedAndAssociationId(restricted, id);
 	}
@@ -140,6 +140,9 @@ public class EventService {
 		
 		return eventRepository.findAllEventByRestrictedIsFalse();
 }
-	
+
+	public List<Event> findAllByRestrictedFalseAndAssociationId(Integer id) {
+		return eventRepository.findAllEventByRestrictedIsFalseAndAssociationId(id);
+	}
 }
 

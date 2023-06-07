@@ -5,17 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import sportinterest.event.EventService;
 
 
+@RequestMapping("report/")
 @RestController
 public class ReportController {
 
@@ -38,7 +33,7 @@ public class ReportController {
  * add one report
  * @param newReport
  */
-    @PostMapping("reports/{id}") //Id de l' event
+    @PostMapping("create/event/{id}") //Id de l' event
     public void postReport(@PathVariable("id") Integer id, @RequestBody Report newReport){
 		
     	eventService.setReportById(id, newReport);
@@ -50,7 +45,7 @@ public class ReportController {
  * @param id
  * @return
  */
-    @GetMapping("reports/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<Report> getOneReport(@PathVariable("id") Integer id){
     	Optional<Report> oReport = reportService.getOneReport(id);
     	if(oReport.isEmpty()) {
@@ -66,7 +61,7 @@ public class ReportController {
  * @param id
  * @param report
  */
-    @PutMapping("reports/{id}")
+    @PutMapping("edit/{id}")
     public void updateReport(@PathVariable("id") Integer id, @RequestBody Report report) {
     	Optional<Report> oReport = reportService.getOneReport(id);
     	if(oReport.isPresent()) {
@@ -78,7 +73,7 @@ public class ReportController {
  * delete one report by his id    
  * @param id
  */
-    @DeleteMapping("reports/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteReport(@PathVariable("id") Integer id) {
     	reportService.deleteReport(id);
     }

@@ -5,18 +5,12 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import sportinterest.article.User;
 
 
 @CrossOrigin(origins = "*")
+@RequestMapping("user/")
 @RestController
 public class UserController {
 
@@ -35,9 +29,9 @@ public class UserController {
 /**
  * get all users by association id	
  * @return
- * @param association id
+ * @param id association
  */
-     @GetMapping("users/association/{id}")
+     @GetMapping("association/{id}")
      public List<User> getUsersByAssociationId(@PathVariable("id") Integer id){
            return userService.getUsersByAssociationId(id);
      }
@@ -46,7 +40,7 @@ public class UserController {
  * add one user
  * @param newUser
  */
-    @PostMapping("users")
+    @PostMapping("create")
     public boolean postUser(@RequestBody User newUser){
 		Optional<User> oUser = userService.getOneUserByMail(newUser.getMail());
 		if (oUser.isPresent()) {
@@ -62,7 +56,7 @@ public class UserController {
  * @param id
  * @return
  */
-    @GetMapping("users/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<User> getOneUser(@PathVariable("id") Integer id){
     	Optional<User> oUser = userService.getOneUser(id);
     	if(oUser.isEmpty()) {
@@ -79,7 +73,7 @@ public class UserController {
  * @param id
  * @param user
  */
-    @PutMapping("users/{id}")
+    @PutMapping("edit/{id}")
     public void updateUser(@PathVariable("id") Integer id, @RequestBody User user) {
     	Optional<User> oUser = userService.getOneUser(id);
     	if(oUser.isPresent()) {
@@ -92,26 +86,13 @@ public class UserController {
  * delete one user by his id    
  * @param id
  */
-    @DeleteMapping("users/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteUser(@PathVariable("id") Integer id) {
     	userService.deleteUser(id);
     }
-    
-    @PostMapping("connection")
-    public boolean loginUser(@RequestBody User user) {
-    	String mail = user.getMail();
-    	String password = user.getPassword();
-    	
-        // Verify if mail exist
-        Optional<User> existingUser = userService.getOneUserByMail(mail);
-        if(!existingUser.isPresent()) {
-            return false;
-        }
-        
-        // Verify if mail match with password
-        if(!existingUser.get().getPassword().equals(password)) {
-           return false;
-        }
-		return true;
+
+    @GetMapping("roles")
+    public ERole[] getRoles(){
+        return ERole.values();
     }
 }

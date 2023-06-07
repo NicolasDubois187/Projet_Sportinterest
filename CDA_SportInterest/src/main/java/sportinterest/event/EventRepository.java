@@ -21,4 +21,5 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 	
 	List<Event> findAllEventByRestrictedIsFalse();
 
+    List<Event> findAllEventByRestrictedIsFalseAndAssociationId(Integer id);
 }

@@ -8,30 +8,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+@RequestMapping("event/")
 @RestController
 public class EventController {
 	
 	@Autowired
 	EventService eventService;
-	
-/**
- * get all events	
- * @return
- */
-//    @GetMapping("events")
-//    public List<Event> getEvents(){
-//        return eventService.getEvents();
-//    }
     
 /**
  * get all events order by date ASC and optional limit
@@ -48,13 +33,13 @@ public class EventController {
 		}
 	}
 	
-/**
- * get all events by association id order by date ASC and optional limit
- * @return
- * @param limit
- * @param association id
- */	
-	@GetMapping("events/association/{id}")
+	/**
+	 * get all events by association id order by date ASC and optional limit
+	 * @return
+	 * @param limit
+	 * @param id association
+	 */
+	@GetMapping("association/{id}")
 	public List<Event> getEventsByAssociationId(
 	        @PathVariable Integer id,
 	        @RequestParam(required = false) Integer limit) {
@@ -66,20 +51,21 @@ public class EventController {
 	    }
 	}
 	
-/**
- * get all events by report_id isNull
- * @return
- */	
-	@GetMapping("events/not-report")
+	/**
+	 * get all events by report_id isNull
+	 * @return
+	 */
+	@GetMapping("not-report")
 	public List<Event> getEventsByReportIdIsNull() {
 		return eventService.getAllEventByReportIdNull();
 	}
+
 	
-/**
- * get all events by report_id isNotNull
- * @return
- */	
-	@GetMapping("events/report-ok")
+	/**
+	 * get all events by report_id isNotNull
+	 * @return
+	 */
+	@GetMapping("reported")
 	public List<Event> getEventsByReportIdIsNotNull() {
 		return eventService.getAllEventByReportIdNotNull();
 	}
@@ -88,7 +74,7 @@ public class EventController {
  * get all events by restricted is false
  * @return
  */
-	@GetMapping("/events/not-restricted")
+	@GetMapping("public")
 	public List<Event> getEventsNotRestricted() {
 	    return eventService.findAllByRestrictedFalse();
 	}
@@ -97,7 +83,7 @@ public class EventController {
  * add one event
  * @param newEvent
  */
-    @PostMapping("events")
+    @PostMapping("create")
     public void postEvent(@RequestBody Event newEvent){
 		    
         eventService.addEvent(newEvent);
@@ -108,7 +94,7 @@ public class EventController {
  * @param id
  * @return
  */
-    @GetMapping("events/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<Event> getOneEvent(@PathVariable("id") Integer id){
     	Optional<Event> oEvent = eventService.getOneEvent(id);
     	if(oEvent.isEmpty()) {
@@ -120,27 +106,24 @@ public class EventController {
     	}
     }
     
-/**
-* get one event by restricted type    
-* @param restricted
-* @param associationId
-* @return
-*/
-    @GetMapping("restricted/{id}")
+	/**
+	* get events by restricted type
+	* @param restricted
+	* @param id association
+	* @return
+	*/
+    @GetMapping("restricted/association/{id}")
     public List<Event> getEventByRestrictedAndAssociationId(@RequestParam(value = "restricted", defaultValue = "false") Boolean restricted, @PathVariable("id") Integer id) {
-        List<Event> events = eventService.getEventByRestrictedAndAssociationId(restricted, id);
-        if (events.isEmpty()) {
-           // /!\ CAS D'ERREUR //
-        }
+        List<Event> events = eventService.getEventsByRestrictedAndAssociationId(restricted, id);
         return events;
     }
 
-/**
- * update one event by his id    
- * @param id
- * @param event
- */
-    @PutMapping("events/{id}")
+	/**
+	 * update one event by his id
+	 * @param id
+	 * @param event
+	 */
+    @PutMapping("edit/{id}")
     public void updateEvent(@PathVariable("id") Integer id, @RequestBody Event event) {
     	Optional<Event> oEvent = eventService.getOneEvent(id);
     	if(oEvent.isPresent()) {
@@ -153,9 +136,18 @@ public class EventController {
  * delete one event by his id    
  * @param id
  */
-    @DeleteMapping("events/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteEvent(@PathVariable("id") Integer id) {
     	eventService.deleteEvent(id);
     }
-	
+
+
+	/**
+	 * Get public events by association id
+	 * @return
+	 */
+	@GetMapping("public/association/{id}")
+	public List<Event> getEventsNotRestrictedByAssociationId(@PathVariable Integer id) {
+		return eventService.findAllByRestrictedFalseAndAssociationId(id);
+	}
 }

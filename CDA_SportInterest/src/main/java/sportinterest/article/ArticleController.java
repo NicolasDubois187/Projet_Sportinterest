@@ -5,15 +5,10 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+@RequestMapping("article/")
 @RestController
 public class ArticleController {
 	
@@ -32,9 +27,9 @@ public class ArticleController {
 /**
  * get all articles by association id	
  * @return
- * @param association id
+ * @param id association
  */
-   @GetMapping("articles/association/{id}")
+   @GetMapping("association/{id}")
     public List<Article> getArticlesByAssociationId(@PathVariable("id") Integer id){
          return articleService.getArticlesByAssociationId(id);
     }
@@ -43,7 +38,7 @@ public class ArticleController {
  * add one article
  * @param newArticle
  */
-    @PostMapping("articles")
+    @PostMapping("create")
     public void postArticle(@RequestBody Article newArticle){
     
         articleService.addArticle(newArticle);
@@ -53,7 +48,7 @@ public class ArticleController {
  * @param id
  * @return
  */
-    @GetMapping("articles/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<Article> getOneArticle(@PathVariable("id") Integer id){
     	Optional<Article> oArticle = articleService.getOneArticle(id);
     	if(oArticle.isEmpty()) {
@@ -69,7 +64,7 @@ public class ArticleController {
  * @param id
  * @param article
  */
-    @PutMapping("articles/{id}")
+    @PutMapping("edit/{id}")
     public void updateArticle(@PathVariable("id") Integer id, @RequestBody Article article) {
     	Optional<Article> oArticle = articleService.getOneArticle(id);
     	if(oArticle.isPresent()) {
@@ -81,7 +76,7 @@ public class ArticleController {
  * delete one article by his id    
  * @param id
  */
-    @DeleteMapping("articles/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteArticle(@PathVariable("id") Integer id) {
     	articleService.deleteArticle(id);
     }

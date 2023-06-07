@@ -6,15 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+@RequestMapping("association/")
 @RestController
 public class AssociationController {
 
@@ -33,7 +28,7 @@ public class AssociationController {
  * add one association
  * @param newAssociation
  */
-    @PostMapping("associations")
+    @PostMapping("create")
     public void postAssociation(@RequestBody Association newAssociation){
 	    
         associationService.addAssociation(newAssociation);
@@ -44,7 +39,7 @@ public class AssociationController {
  * @param id
  * @return
  */
-    @GetMapping("associations/{id}")
+    @GetMapping("id/{id}")
     public ResponseEntity<Association> getOneAssociation(@PathVariable("id") Integer id){
     	Optional<Association> oAssociation = associationService.getOneAssociation(id);
     	if(oAssociation.isEmpty()) {
@@ -61,7 +56,7 @@ public class AssociationController {
  * @param id
  * @param association
  */
-    @PutMapping("associations/{id}")
+    @PutMapping("edit/{id}")
     @PreAuthorize(("hasRole('president')"))
     public void updateAssociation(@PathVariable("id") Integer id, @RequestBody Association association) {
     	Optional<Association> oAssociation = associationService.getOneAssociation(id);
@@ -75,7 +70,7 @@ public class AssociationController {
  * delete one association by his id    
  * @param id
  */
-    @DeleteMapping("associations/{id}")
+    @DeleteMapping("delete/{id}")
     public void deleteAssociation(@PathVariable("id") Integer id) {
     	associationService.deleteAssociation(id);
     }
