@@ -21,18 +21,19 @@ public class ReportController {
 	EventService eventService;
 		
 	
-/**
- * get all reports	
- * @return
- */
+    /**
+     * Get all reports
+     * @return
+     */
     @GetMapping("reports")
     public List<Report> getReports(){
         return reportService.getReports();
     }
-/**
- * add one report
- * @param newReport
- */
+
+    /**
+     * Add one report
+     * @param newReport
+     */
     @PostMapping("create/event/{id}") //Id de l' event
     public void postReport(@PathVariable("id") Integer id, @RequestBody Report newReport){
 		
@@ -40,11 +41,12 @@ public class ReportController {
         reportService.addReport(newReport);
         
     }
-/**
- * get one report by his id    
- * @param id
- * @return
- */
+
+    /**
+     * Get one report by his id
+     * @param id
+     * @return
+     */
     @GetMapping("id/{id}")
     public ResponseEntity<Report> getOneReport(@PathVariable("id") Integer id){
     	Optional<Report> oReport = reportService.getOneReport(id);
@@ -56,11 +58,12 @@ public class ReportController {
     		return ResponseEntity.ok(r);
     	}
     }
-/**
- * update one report by his id    
- * @param id
- * @param report
- */
+
+    /**
+     * Update one report by his id
+     * @param id
+     * @param report
+     */
     @PutMapping("edit/{id}")
     public void updateReport(@PathVariable("id") Integer id, @RequestBody Report report) {
     	Optional<Report> oReport = reportService.getOneReport(id);
@@ -69,10 +72,11 @@ public class ReportController {
     	reportService.updateReport(id, report);
     	}
     }
-/**
- * delete one report by his id    
- * @param id
- */
+
+    /**
+     * Delete one report by his id
+     * @param id
+     */
     @DeleteMapping("delete/{id}")
     public void deleteReport(@PathVariable("id") Integer id) {
     	reportService.deleteReport(id);

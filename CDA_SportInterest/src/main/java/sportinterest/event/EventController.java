@@ -18,11 +18,11 @@ public class EventController {
 	@Autowired
 	EventService eventService;
     
-/**
- * get all events order by date ASC and optional limit
- * @return
- * @param limit
- */
+	/**
+	 * Get all events order by date ASC and optional limit
+	 * @return
+	 * @param limit
+	 */
 	@GetMapping("events")
 	public List<Event> getEvents(@RequestParam(required = false) Integer limit) {
 		if (limit == null) {
@@ -34,7 +34,7 @@ public class EventController {
 	}
 	
 	/**
-	 * get all events by association id order by date ASC and optional limit
+	 * Get all events by association id order by date ASC and optional limit
 	 * @return
 	 * @param limit
 	 * @param id association
@@ -52,7 +52,7 @@ public class EventController {
 	}
 	
 	/**
-	 * get all events by report_id isNull
+	 * Get all events by report_id isNull
 	 * @return
 	 */
 	@GetMapping("not-report")
@@ -62,7 +62,7 @@ public class EventController {
 
 	
 	/**
-	 * get all events by report_id isNotNull
+	 * Get all events by report_id isNotNull
 	 * @return
 	 */
 	@GetMapping("reported")
@@ -70,30 +70,30 @@ public class EventController {
 		return eventService.getAllEventByReportIdNotNull();
 	}
 	
-/**
- * get all events by restricted is false
- * @return
- */
+	/**
+	 * Get all events by restricted is false
+	 * @return
+	 */
 	@GetMapping("public")
 	public List<Event> getEventsNotRestricted() {
 	    return eventService.findAllByRestrictedFalse();
 	}
 	
-/**
- * add one event
- * @param newEvent
- */
+	/**
+	 * Add one event
+	 * @param newEvent
+	 */
     @PostMapping("create")
     public void postEvent(@RequestBody Event newEvent){
 		    
         eventService.addEvent(newEvent);
     }
 
-/**
- * get one event by his id    
- * @param id
- * @return
- */
+	/**
+	 * Get one event by his id
+	 * @param id
+	 * @return
+	 */
     @GetMapping("id/{id}")
     public ResponseEntity<Event> getOneEvent(@PathVariable("id") Integer id){
     	Optional<Event> oEvent = eventService.getOneEvent(id);

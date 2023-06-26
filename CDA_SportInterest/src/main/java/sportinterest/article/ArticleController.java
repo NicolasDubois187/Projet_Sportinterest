@@ -15,39 +15,40 @@ public class ArticleController {
 	@Autowired
 	ArticleService articleService;
 
-/**
- * get all articles	
- * @return
- */
+    /**
+     * Get all articles
+     * @return
+     */
     @GetMapping("articles")
     public List<Article> getArticles(){
         return articleService.getArticles();
     }
     
-/**
- * get all articles by association id	
- * @return
- * @param id association
- */
+    /**
+     * Get all articles by association id
+     * @return
+     * @param id association
+     */
    @GetMapping("association/{id}")
     public List<Article> getArticlesByAssociationId(@PathVariable("id") Integer id){
          return articleService.getArticlesByAssociationId(id);
     }
    
-/**
- * add one article
- * @param newArticle
- */
+    /**
+     * Add one article
+     * @param newArticle
+     */
     @PostMapping("create")
     public void postArticle(@RequestBody Article newArticle){
     
         articleService.addArticle(newArticle);
     }
-/**
- * get one article by his id    
- * @param id
- * @return
- */
+
+    /**
+     * Get one article by his id
+     * @param id
+     * @return
+     */
     @GetMapping("id/{id}")
     public ResponseEntity<Article> getOneArticle(@PathVariable("id") Integer id){
     	Optional<Article> oArticle = articleService.getOneArticle(id);
@@ -59,11 +60,12 @@ public class ArticleController {
     		return ResponseEntity.ok(a);
     	}
     }
-/**
- * update one article by his id    
- * @param id
- * @param article
- */
+
+    /**
+     * Update one article by his id
+     * @param id
+     * @param article
+     */
     @PutMapping("edit/{id}")
     public void updateArticle(@PathVariable("id") Integer id, @RequestBody Article article) {
     	Optional<Article> oArticle = articleService.getOneArticle(id);
@@ -72,14 +74,14 @@ public class ArticleController {
     		articleService.updateArticle(id, article);
     	}
     }
-/**
- * delete one article by his id    
- * @param id
- */
+
+    /**
+     * Delete one article by his id
+     * @param id
+     */
     @DeleteMapping("delete/{id}")
     public void deleteArticle(@PathVariable("id") Integer id) {
     	articleService.deleteArticle(id);
     }
-    
-    
+
 }

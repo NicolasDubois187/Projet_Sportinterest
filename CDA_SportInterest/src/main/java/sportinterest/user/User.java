@@ -1,4 +1,4 @@
-package sportinterest.article;
+package sportinterest.user;
 
 import java.util.Collection;
 import java.util.List;

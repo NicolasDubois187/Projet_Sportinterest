@@ -27,7 +27,7 @@ public class SecurityConfig {
      * Root /api/v1/auth/** is public
      * All other requests need a user who has the USER role
      * @param http
-     * @return
+     * @return SecurityFilterChain
      * @throws Exception
      */
     @Bean
@@ -36,8 +36,8 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeHttpRequests()
-            .requestMatchers("/api/v1/auth/**").permitAll()
-            .requestMatchers("/api/v1/demo").hasAuthority(ERole.ADMIN.name())
+            .requestMatchers("/auth/**").permitAll()
+            .requestMatchers("/auth/demo").hasAuthority(ERole.ADMIN.name())
             .anyRequest()
             .authenticated()
             .and()
@@ -47,7 +47,7 @@ public class SecurityConfig {
             .authenticationProvider(authenticationProvider)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
             .logout()
-            .logoutUrl("/api/v1/auth/logout")
+            .logoutUrl("/auth/logout")
             .addLogoutHandler(logoutHandler)
             .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
 

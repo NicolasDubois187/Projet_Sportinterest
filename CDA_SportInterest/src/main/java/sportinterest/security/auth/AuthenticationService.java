@@ -13,7 +13,7 @@ import sportinterest.security.config.JwtService;
 import sportinterest.security.token.Token;
 import sportinterest.security.token.TokenRepository;
 import sportinterest.user.ERole;
-import sportinterest.article.User;
+import sportinterest.user.User;
 import sportinterest.user.UserRepository;
 
 import java.io.IOException;
@@ -77,6 +77,11 @@ public class AuthenticationService {
                 .build();
     }
 
+    /***
+     * Save the token to the database
+     * @param user
+     * @param jwtToken
+     */
     private void saveUserToken(User user, String jwtToken) {
         var token = Token.builder()
                 .user(user)
@@ -87,6 +92,10 @@ public class AuthenticationService {
         tokenRepository.save(token);
     }
 
+    /***
+     * Revoke all tokens from a user
+     * @param user
+     */
     private void revokeAllUserTokens(User user) {
         var validUserTokens = tokenRepository.findAllValidTokenByUser(user.getId());
         if (validUserTokens.isEmpty())
@@ -98,6 +107,12 @@ public class AuthenticationService {
         tokenRepository.saveAll(validUserTokens);
     }
 
+    /***
+     * Refresh the token
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         final String refreshToken;
@@ -123,6 +138,5 @@ public class AuthenticationService {
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);
             }
         }
-
     }
 }

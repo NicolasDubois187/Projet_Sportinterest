@@ -16,72 +16,71 @@ public class EventService {
 	
 	@Autowired
 	EventRepository eventRepository;
-	
-/**
- * 
- * @return all events
- */
-	
+
+	/**
+	 * Get all events
+	 * @return
+	 */
 	public List<Event> getEvents() {
 				
 		return eventRepository.findAll();	
 	}
 	
 
-/**
- * add one event	
- * @param event
- */
+	/**
+	 * Add one event
+	 * @param event
+	 */
 	public void addEvent(Event event) {
 
 		eventRepository.save(event);
 	}
 
-/**
- * get one event by his id	
- * @param id
- * @return
- */
+	/**
+	 * Get one event by his id
+	 * @param id
+	 * @return
+	 */
 	public Optional<Event> getOneEvent(Integer id) {
 
 		return eventRepository.findById(id);
 	}
 
-/**
- * get events by restricted type	
- * @param restricted
- * @param association id
- * @return
- */
+	/**
+	 * Get events by associationid and restricted type
+	 * @param restricted
+	 * @param association id
+	 * @return
+	 */
 	public List<Event> getEventsByRestrictedAndAssociationId(Boolean restricted, Integer id) {
 	
 		return eventRepository.findByRestrictedAndAssociationId(restricted, id);
 	}
 
-/**
- * update attributes of one event
- * @param id
- * @param event
- */
+	/**
+	 * Update attributes of one event
+	 * @param id
+	 * @param event
+	 */
 	public void updateEvent(Integer id, Event event) {
 
 		eventRepository.save(event);
 	}
 
-/**
- * Delete one event by his id	
- * @param id
- */
+	/**
+	 * Delete one event by his id
+	 * @param id
+	 */
 	public void deleteEvent(Integer id) {
 
 		eventRepository.deleteById(id);
 	}
 	
-/**
- * Set report_id by event_id	
- * @param event_id
- * @param report
- */
+	/**
+	 * Set report_id by event_id
+	 * @param id event
+	 * @param report
+	 */
 	
 	public void setReportById(int id, Report report) {
 		try {
@@ -93,54 +92,56 @@ public class EventService {
 		
 	}
 
-/**
- * get all events order by date ASC
- * @param Pageable limit display
- */
+	/**
+	 * Get all events order by date ASC
+	 * @param pageable limit display
+	 */
 	public List<Event> getAllByOrderByDateAsc(Pageable pageable) {
 		
 		return eventRepository.findAllByOrderByDateAsc(pageable);
 	
 	}
 
-/**
- * get all events by association id order by date ASC
- * @param Pageable limit display
- * @param association id
- */
+	/**
+	 * Get all events by association id order by date ASC
+	 * @param unpaged limit display
+	 * @param id association
+	 */
 	public List<Event> getAllByAssociationIdOrderByDateAsc(Integer id, Pageable unpaged) {
-
-
 		return eventRepository.findAllByAssociationIdOrderByDateAsc(id, unpaged);
 	}
 	
-/**
- * get all events by report_id isNull
- * @return
- */
+	/**
+	 * Get all events by report_id isNull
+	 * @return
+	 */
 	public List<Event> getAllEventByReportIdNull() {
 		
 		return eventRepository.findAllEventByReportIsNull();
 	}
 	
-/**
- * get all events by report_id isNotNull
- * @return
- */
+	/**
+	 * Get all events which have a report
+	 * @return
+	 */
 	public List<Event> getAllEventByReportIdNotNull() {
 		
 		return eventRepository.findAllEventByReportIsNotNull();
 	}
 
-/**
- * get all events by restricted is false
- * @return
- */	
+	/**
+	 * Get all public events
+	 * @return
+	 */
 	public List<Event> findAllByRestrictedFalse() {
-		
 		return eventRepository.findAllEventByRestrictedIsFalse();
 }
 
+	/**
+	 * Get all public events by association id
+	 * @param id
+	 * @return
+	 */
 	public List<Event> findAllByRestrictedFalseAndAssociationId(Integer id) {
 		return eventRepository.findAllEventByRestrictedIsFalseAndAssociationId(id);
 	}

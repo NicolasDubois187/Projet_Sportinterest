@@ -15,75 +15,53 @@ public class ReportService {
 	
 	@Autowired
 	ReportRepository reportRepository;
-	
-	@Autowired
-	EventRepository eventRepository;
-	
-/**
- * 
- * @return all reports
- */
+
+	/**
+	 * Get all reports
+	 * @return
+	 */
 	
 	public List<Report> getReports() {
 					
 		return reportRepository.findAll();
 	}
-/**
- * add one report	
- * @param report
- */
+
+	/**
+	 * Add one report
+	 * @param report
+	 */
 	public void addReport(Report report) {
 
 		reportRepository.save(report);
 		
 	}
-/**
- * get one report by his id	
- * @param id
- * @return
- */
+
+	/**
+	 * Get one report by his id
+	 * @param id
+	 * @return
+	 */
 	public Optional<Report> getOneReport(Integer id) {
 
 		return reportRepository.findById(id);
 	}
-/**
- * update attributes of one report
- * @param id
- * @param report
- */
+
+	/**
+	 * Update attributes of one report
+	 * @param id
+	 * @param report
+	 */
 	public void updateReport(Integer id, Report report) {
 
 		reportRepository.save(report);
 	}
-/**
- * Delete one report by his id	
- * @param id
- */
+
+	/**
+	 * Delete one report by his id
+	 * @param id
+	 */
 	public void deleteReport(Integer id) {
 
 		reportRepository.deleteById(id);
-	}	
-/**
- * Link one event with his report	
- * @param event
- * @param report
- */		
-//	@Transactional
-//	public void createOrUpdateEventReport(Event event, Report report) {
-//	    Event existingEvent = eventRepository.findById(event.getId()).orElse(null);
-//	    if (existingEvent != null) {
-//	        Report existingReport = existingEvent.getReport();
-//	        if (existingReport != null) {
-//	            // update existing report
-//	            existingReport.setName(report.getName());
-//	            existingReport.setDescription(report.getDescription());
-//	            reportRepository.save(existingReport);
-//	        } else {
-//	            // Create new report
-//	            reportRepository.save(report);
-//	            existingEvent.setReport(report);
-//	            eventRepository.save(existingEvent);
-//	        }
-//	    }
-//	}
+	}
 }

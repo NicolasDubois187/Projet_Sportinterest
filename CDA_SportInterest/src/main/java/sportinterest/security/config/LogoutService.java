@@ -14,6 +14,13 @@ public class LogoutService implements LogoutHandler {
 
     private final TokenRepository tokenRepository;
 
+    /**
+     * This method is called when a user logs out.
+     * It will invalidate the token used by the user.
+     * @param request
+     * @param response
+     * @param authentication
+     */
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
         final String authHeader = request.getHeader("Authorization");

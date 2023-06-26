@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth/")
 @RequiredArgsConstructor
 public class AuthenticationController {
 
@@ -39,6 +39,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.authenticate(request));
     }
 
+    /***
+     * Refresh the token of a user
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @PostMapping("/refresh-token")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         service.refreshToken(request, response);

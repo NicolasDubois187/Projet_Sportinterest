@@ -16,29 +16,30 @@ public class AssociationController {
 	@Autowired
 	AssociationService associationService;
 
-/**
- * get all associations
- * @return
- */
+    /**
+     * Get all associations
+     * @return
+     */
     @GetMapping("associations")
     public List<Association> getAssociations(){
         return associationService.getAssociations();
     }
-/**
- * add one association
- * @param newAssociation
- */
+
+    /**
+     * Add one association
+     * @param newAssociation
+     */
     @PostMapping("create")
     public void postAssociation(@RequestBody Association newAssociation){
 	    
         associationService.addAssociation(newAssociation);
     }
 
-/**
- * get one association by his id    
- * @param id
- * @return
- */
+    /**
+     * Get one association by his id
+     * @param id
+     * @return
+     */
     @GetMapping("id/{id}")
     public ResponseEntity<Association> getOneAssociation(@PathVariable("id") Integer id){
     	Optional<Association> oAssociation = associationService.getOneAssociation(id);
@@ -51,11 +52,11 @@ public class AssociationController {
     	}
     }
 
-/**
- * update one association by his id    
- * @param id
- * @param association
- */
+    /**
+     * Update one association by his id
+     * @param id
+     * @param association
+     */
     @PutMapping("edit/{id}")
     @PreAuthorize(("hasRole('president')"))
     public void updateAssociation(@PathVariable("id") Integer id, @RequestBody Association association) {
@@ -66,10 +67,11 @@ public class AssociationController {
     	
     	}
     }
-/**
- * delete one association by his id    
- * @param id
- */
+
+    /**
+     * Delete one association by his id
+     * @param id
+     */
     @DeleteMapping("delete/{id}")
     public void deleteAssociation(@PathVariable("id") Integer id) {
     	associationService.deleteAssociation(id);

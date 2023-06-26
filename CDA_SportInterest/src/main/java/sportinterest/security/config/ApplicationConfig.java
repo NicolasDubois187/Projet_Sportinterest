@@ -21,7 +21,7 @@ public class ApplicationConfig {
     private final UserRepository repository;
 
     /***
-     * This method is used to load the user details from the database
+     * Load the user details from the database
      * @return
      */
     @Bean
@@ -31,7 +31,7 @@ public class ApplicationConfig {
     }
 
     /***
-     * This method is used to return the authentication provider
+     * Return the authentication provider
      * @return
      */
     @Bean
@@ -43,7 +43,7 @@ public class ApplicationConfig {
     }
 
     /***
-     * This method is used to return the authentication manager
+     * Return the authentication manager
      * @param config
      * @return
      * @throws Exception
@@ -54,7 +54,7 @@ public class ApplicationConfig {
     }
 
     /***
-     * This method is used to return the password encoder
+     * Return the password encoder
      * @return
      */
     @Bean
