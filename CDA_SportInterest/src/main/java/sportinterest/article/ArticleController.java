@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+@CrossOrigin
 @RequestMapping("article/")
 @RestController
 public class ArticleController {

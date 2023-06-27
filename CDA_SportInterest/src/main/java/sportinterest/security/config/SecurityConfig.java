@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
-import sportinterest.user.ERole;
 
 @Configuration
 @EnableWebSecurity
@@ -20,12 +19,12 @@ public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
-    private final LogoutHandler logoutHandler;
+    private final LogoutService logoutHandler;
 
     /***
      * Configure the security of the application
      * Root /api/v1/auth/** is public
-     * All other requests need a user who has the USER role
+     * All other requests need to be authenticated
      * @param http
      * @return SecurityFilterChain
      * @throws Exception
@@ -37,9 +36,9 @@ public class SecurityConfig {
             .csrf().disable()
             .authorizeHttpRequests()
             .requestMatchers("/auth/**").permitAll()
-            .requestMatchers("/auth/demo").hasAuthority(ERole.ADMIN.name())
             .anyRequest()
-            .authenticated()
+//            .authenticated()
+            .permitAll()
             .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

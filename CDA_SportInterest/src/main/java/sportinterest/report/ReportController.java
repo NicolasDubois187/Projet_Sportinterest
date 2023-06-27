@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import sportinterest.event.EventService;
 
 
+@CrossOrigin
 @RequestMapping("report/")
 @RestController
 public class ReportController {
