@@ -18,8 +18,8 @@ import java.util.function.Function;
 @Service
 public class JwtService {
 
-    @Value("${jwt.secretkey}")
-    private String SECRET_KEY;
+//    @Value("${jwt.secretkey}")
+    private String SECRET_KEY = "5468576D5A7133743677397A24432646294A404E635266556A586E3272357537";
     @Value("${jwt.expiration}")
     private long jwtExpiration;
     @Value("${jwt.refreshtoken.expiration}")
@@ -61,7 +61,7 @@ public class JwtService {
      * @return  the token
      */
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        return buildToken(extraClaims, userDetails, jwtExpiration);                                                             //Builds the token
+        return buildToken(extraClaims, userDetails, jwtExpiration);
     }
 
     /***
@@ -70,7 +70,7 @@ public class JwtService {
      * @return  the refresh token
      */
     public String generateRefreshToken(UserDetails userDetails) {
-        return buildToken(new HashMap<>(), userDetails, refreshExpiration);                                                             //Builds the token
+        return buildToken(new HashMap<>(), userDetails, refreshExpiration);
     }
 
     /***

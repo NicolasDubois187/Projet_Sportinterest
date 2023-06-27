@@ -15,6 +15,7 @@ import sportinterest.security.token.TokenRepository;
 import sportinterest.user.ERole;
 import sportinterest.user.User;
 import sportinterest.user.UserRepository;
+import sportinterest.user.UserService;
 
 import java.io.IOException;
 
@@ -26,6 +27,7 @@ public class AuthenticationService {
     private final TokenRepository tokenRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+    private final UserService userService;
     private final AuthenticationManager authenticationManager;
 
     /***
@@ -50,10 +52,12 @@ public class AuthenticationService {
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
+        savedUser = userService.getOneUserByMail(savedUser.getMail()).get();
 
         return AuthenticationResponse.builder()
                 .accessToken(jwtToken)
                 .refreshToken(refreshToken)
+                .userId(savedUser.getId())
                 .build();
     }
 
@@ -133,6 +137,7 @@ public class AuthenticationService {
                 var authResponse = AuthenticationResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
+                        .userId(user.getId())
                         .build();
 
                 new ObjectMapper().writeValue(response.getOutputStream(), authResponse);

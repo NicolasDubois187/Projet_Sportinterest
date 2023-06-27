@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sportinterest.security.config.JwtService;
 
 
 @CrossOrigin
@@ -115,5 +116,30 @@ public class UserController {
     		User u = oUser.get();
     		return ResponseEntity.ok(u);
     	}
+    }
+
+    /**
+     * Get user from the token
+     */
+    @GetMapping("token/{token}")
+    public ResponseEntity<User> getUserFromToken(@PathVariable("token") String token){
+        JwtService jwtService = new JwtService();
+
+        try {
+            String mail = jwtService.extractMail(token);
+            Optional<User> oUser = userService.getOneUserByMail(mail);
+            if(oUser.isEmpty()) {
+                // 404
+                return ResponseEntity.notFound().build();
+            } else {
+                User u = oUser.get();
+                return ResponseEntity.ok(u);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
+
+
     }
 }
