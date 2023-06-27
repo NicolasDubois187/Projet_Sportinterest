@@ -50,18 +50,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String mail;
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            filterChain.doFilter(request, response);
+//            filterChain.doFilter(request, response);
             return;
         }
 
-        jwt = authHeader.substring(7);      //Remove "Bearer " from the token
-        mail = jwtService.extractMail(jwt);
+        try {
+            jwt = authHeader.substring(7);      //Remove "Bearer " from the token
+            mail = jwtService.extractMail(jwt);
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
+            return;
+        }
+
 
         if (mail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(mail);
             var isTokenValid = tokenRepository.findByToken(jwt)
                     .map(t -> !t.isExpired() && !t.isRevoked())
                     .orElse(false);
+
+            if (!isTokenValid) {
+                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Invalid token");
+                return;
+            }
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
