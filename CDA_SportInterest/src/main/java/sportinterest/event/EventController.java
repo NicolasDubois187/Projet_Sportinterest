@@ -106,30 +106,16 @@ public class EventController {
     		return ResponseEntity.ok(e);
     	}
     }
-    
-	/**
-	* get events by restricted type
-	* @param restricted
-	* @param id association
-	* @return
-	*/
-    @GetMapping("restricted/association/{id}")
-    public List<Event> getEventByRestrictedAndAssociationId(@RequestParam(value = "restricted", defaultValue = "false") Boolean restricted, @PathVariable("id") Integer id) {
-        List<Event> events = eventService.getEventsByRestrictedAndAssociationId(restricted, id);
-        return events;
-    }
 
 	/**
-	 * update one event by his id
-	 * @param id
+	 * update one event
 	 * @param event
 	 */
-    @PutMapping("edit/{id}")
-    public void updateEvent(@PathVariable("id") Integer id, @RequestBody Event event) {
-    	Optional<Event> oEvent = eventService.getOneEvent(id);
+    @PutMapping("edit")
+    public void updateEvent(@RequestBody Event event) {
+    	Optional<Event> oEvent = eventService.getOneEvent(event.getId());
     	if(oEvent.isPresent()) {
-		    		
-    	eventService.updateEvent(id, event);
+    	eventService.updateEvent(event);
     	}
     }
 
@@ -142,13 +128,4 @@ public class EventController {
     	eventService.deleteEvent(id);
     }
 
-
-	/**
-	 * Get public events by association id
-	 * @return
-	 */
-	@GetMapping("public/association/{id}")
-	public List<Event> getEventsNotRestrictedByAssociationId(@PathVariable Integer id) {
-		return eventService.findAllByRestrictedFalseAndAssociationId(id);
-	}
 }

@@ -65,11 +65,10 @@ public class UserService {
 	}
 
 	/**
-	 * Update attributes of one user
-	 * @param id
+	 * Save the user with his new infos
 	 * @param user
 	 */
-	public void updateUser(Integer id, User user) {
+	public void updateUser(User user) {
 		userRepository.save(user);
 	}
 

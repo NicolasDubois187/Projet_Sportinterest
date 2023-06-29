@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import sportinterest.security.config.JwtService;
 
 
 @CrossOrigin
@@ -36,21 +35,6 @@ public class UserController {
      public List<User> getUsersByAssociationId(@PathVariable("id") Integer id){
            return userService.getUsersByAssociationId(id);
      }
-     
-    /**
-     * Add one user
-     * @param newUser
-     */
-    @PostMapping("create")
-    public boolean postUser(@RequestBody User newUser){
-		Optional<User> oUser = userService.getOneUserByMail(newUser.getMail());
-		if (oUser.isPresent()) {
-			return false;
-		} else {
-			userService.addUser(newUser);	
-			return true;
-		}
-	}
 
     /**
      * Get one user by his id
@@ -71,16 +55,21 @@ public class UserController {
 
     /**
      * Update one user by his id
-     * @param id
      * @param user
      */
-    @PutMapping("edit/{id}")
-    public void updateUser(@PathVariable("id") Integer id, @RequestBody User user) {
-    	Optional<User> oUser = userService.getOneUser(id);
-    	if(oUser.isPresent()) {
-				    		
-    	userService.updateUser(id, user);
-    	}
+    @PutMapping("edit")
+    public ResponseEntity updateUser(@RequestBody User user) {
+        try {
+            Optional<User> oUser = userService.getOneUser(user.getId());
+            if(oUser.isPresent()){
+                userService.updateUser(user);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().build();
     }
 
     /**
@@ -88,8 +77,14 @@ public class UserController {
      * @param id
      */
     @DeleteMapping("delete/{id}")
-    public void deleteUser(@PathVariable("id") Integer id) {
-    	userService.deleteUser(id);
+    public ResponseEntity deleteUser(@PathVariable("id") Integer id) {
+        try {
+    	    userService.deleteUser(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
     }
 
     /**

@@ -59,11 +59,9 @@ public class EventService {
 
 	/**
 	 * Update attributes of one event
-	 * @param id
 	 * @param event
 	 */
-	public void updateEvent(Integer id, Event event) {
-
+	public void updateEvent(Event event) {
 		eventRepository.save(event);
 	}
 
@@ -81,7 +79,6 @@ public class EventService {
 	 * @param id event
 	 * @param report
 	 */
-	
 	public void setReportById(int id, Report report) {
 		try {
 			Event event = eventRepository.getById(id);
