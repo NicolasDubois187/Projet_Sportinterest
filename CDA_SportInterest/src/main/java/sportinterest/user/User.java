@@ -28,6 +28,7 @@ public class User implements UserDetails {
 	private String lastname;
 	private String firstname;
 	private String mail;
+	@JsonIgnore
 	private String password;
 	@ManyToOne
 	private Association association;
