@@ -57,4 +57,13 @@ public class AssociationService {
 	public void deleteAssociation(Integer id) {
 		associationRepository.deleteById(id);
 	}
+
+	/**
+	 * Get all associations by president id
+	 * @param id
+	 * @return
+	 */
+    public Optional<Association> getAssociationByPresidentId(Integer id) {
+		return associationRepository.findByPresidentId(id);
+    }
 }

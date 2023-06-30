@@ -32,7 +32,6 @@ public class AssociationController {
      */
     @PostMapping("create")
     public void postAssociation(@RequestBody Association newAssociation){
-	    
         associationService.addAssociation(newAssociation);
     }
 
@@ -77,5 +76,21 @@ public class AssociationController {
     public void deleteAssociation(@PathVariable("id") Integer id) {
     	associationService.deleteAssociation(id);
     }
-	
+
+    /**
+     * Get one association by his president id
+     * @param id president
+     * @return
+     */
+    @GetMapping("president/{pdtid}")
+    public ResponseEntity<Association> getAssociationByPresidentId(@PathVariable("pdtid") Integer id){
+    	Optional<Association> oAssociation = associationService.getAssociationByPresidentId(id);
+    	if(oAssociation.isEmpty()) {
+    		// 404
+    		return ResponseEntity.notFound().build();
+    	} else {
+    		Association a = oAssociation.get();
+    		return ResponseEntity.ok(a);
+    	}
+    }
 }
