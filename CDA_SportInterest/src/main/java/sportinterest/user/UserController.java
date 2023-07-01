@@ -125,7 +125,8 @@ public class UserController {
      * @param mail
      */
     @GetMapping("mailTaken/{mail}")
-    public boolean mailTaken(String mail) {
+    public boolean mailTaken(@PathVariable("mail") String mail) {
     	return userService.mailTaken(mail);
     }
+
 }

@@ -37,6 +37,8 @@ public class SecurityConfig {
             .csrf().disable()
             .authorizeHttpRequests()
             .requestMatchers("/auth/**").permitAll()
+            .requestMatchers("association/associations").permitAll()
+            .requestMatchers("user/mailTaken/*").permitAll()
             .anyRequest()
             .authenticated()
 //            .permitAll()
