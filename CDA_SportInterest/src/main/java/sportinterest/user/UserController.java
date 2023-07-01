@@ -58,12 +58,10 @@ public class UserController {
      * @param user
      */
     @PutMapping("edit")
-    public ResponseEntity updateUser(@RequestBody User user) {
+    public ResponseEntity updateUser(@RequestBody User newUser) {
         try {
-            Optional<User> oUser = userService.getOneUser(user.getId());
-            if(oUser.isPresent()){
-                userService.updateUser(user);
-            }
+            Optional<User> oUser = userService.getOneUser(newUser.getId());
+            oUser.ifPresent(user -> userService.updateUser(newUser, user));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.notFound().build();
@@ -120,5 +118,14 @@ public class UserController {
     @GetMapping("current")
     public ResponseEntity<UserDetails> getCurrentUser(){
         return UserService.getCurrentUser();
+    }
+
+    /**
+     * Check if mail is taken
+     * @param mail
+     */
+    @GetMapping("mailTaken/{mail}")
+    public boolean mailTaken(String mail) {
+    	return userService.mailTaken(mail);
     }
 }

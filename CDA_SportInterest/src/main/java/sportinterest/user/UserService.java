@@ -65,11 +65,18 @@ public class UserService {
 	}
 
 	/**
-	 * Save the user with his new infos
-	 * @param user
+	 * Update one user by his id
+	 * @param newUser
+	 * @param existiongUser
 	 */
-	public void updateUser(User user) {
-		userRepository.save(user);
+	public void updateUser(User newUser, User existiongUser) {
+		if ((newUser.getFirstname() != null) && newUser.getFirstname().equals(existiongUser.getFirstname()))
+			existiongUser.setFirstname(newUser.getFirstname());
+		if ((newUser.getLastname() != null) && newUser.getLastname().equals(existiongUser.getLastname()))
+			existiongUser.setLastname(newUser.getLastname());
+		if (newUser.getAssociation() != null)
+			existiongUser.setAssociation(newUser.getAssociation());
+		userRepository.save(existiongUser);
 	}
 
 	/**
@@ -98,5 +105,10 @@ public class UserService {
 		}
 
 
+	}
+
+	public boolean mailTaken(String mail) {
+		Optional<User> oUser = userRepository.findByMail(mail);
+		return oUser.isPresent();
 	}
 }
