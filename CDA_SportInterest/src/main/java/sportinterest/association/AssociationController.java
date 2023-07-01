@@ -93,4 +93,21 @@ public class AssociationController {
     		return ResponseEntity.ok(a);
     	}
     }
+
+    /**
+     * Get one association by his name
+     * @param name
+     * @return
+     */
+    @GetMapping("name/{name}")
+    public ResponseEntity<Association> getAssociationbyName(@PathVariable("name") String name){
+    	Optional<Association> oAssociation = associationService.getAssociationByName(name);
+    	if(oAssociation.isEmpty()) {
+    		// 404
+    		return ResponseEntity.notFound().build();
+    	} else {
+    		Association a = oAssociation.get();
+    		return ResponseEntity.ok(a);
+    	}
+    }
 }

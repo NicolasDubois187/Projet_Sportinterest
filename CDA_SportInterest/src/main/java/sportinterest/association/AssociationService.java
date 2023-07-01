@@ -66,4 +66,13 @@ public class AssociationService {
     public Optional<Association> getAssociationByPresidentId(Integer id) {
 		return associationRepository.findByPresidentId(id);
     }
+
+	/**
+	 * Get association by name
+	 * @param name
+	 * @return
+	 */
+    public Optional<Association> getAssociationByName(String name) {
+		return associationRepository.findByName(name);
+    }
 }
