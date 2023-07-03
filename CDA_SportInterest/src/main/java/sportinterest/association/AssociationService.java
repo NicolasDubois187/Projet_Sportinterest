@@ -3,8 +3,13 @@ package sportinterest.association;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sportinterest.user.ERole;
+import sportinterest.user.User;
+import sportinterest.user.UserRepository;
+import sportinterest.user.UserService;
 
 
 @Service
@@ -12,6 +17,9 @@ public class AssociationService {
 
 	@Autowired
 	AssociationRepository associationRepository;
+	@Autowired
+	UserRepository userRepository;
+
 
 	/**
 	 * Get all associations
@@ -27,7 +35,12 @@ public class AssociationService {
 	 */
 	public void addAssociation(Association association) {
 
+		User president = userRepository.findById(association.getPresidentId()).isPresent() ? userRepository.findById(association.getPresidentId()).get() : null;
+		assert president != null;
+		president.setRole(ERole.ADMIN);
+
 		associationRepository.save(association);
+		userRepository.save(president);
 	}
 
 	/**

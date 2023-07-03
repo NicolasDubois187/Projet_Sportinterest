@@ -55,19 +55,16 @@ public class UserController {
 
     /**
      * Update one user by his id
-     * @param user
+     * @param newUser
      */
     @PutMapping("edit")
-    public ResponseEntity updateUser(@RequestBody User newUser) {
+    public void updateUser(@RequestBody User newUser) {
         try {
             Optional<User> oUser = userService.getOneUser(newUser.getId());
             oUser.ifPresent(user -> userService.updateUser(newUser, user));
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.notFound().build();
         }
-
-        return ResponseEntity.ok().build();
     }
 
     /**

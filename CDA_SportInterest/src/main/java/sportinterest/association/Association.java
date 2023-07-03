@@ -13,7 +13,7 @@ public class Association {
 	private String name;
 	private String description;
 	private int presidentId;
-	
+
 	public Association() {
 		
 	}
@@ -50,5 +50,11 @@ public class Association {
 		this.description = description;
 	}
 
-	
+	public int getPresidentId() {
+		return presidentId;
+	}
+
+	public void setPresidentId(int presidentId) {
+		this.presidentId = presidentId;
+	}
 }

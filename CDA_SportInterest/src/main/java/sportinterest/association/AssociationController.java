@@ -31,8 +31,13 @@ public class AssociationController {
      * @param newAssociation
      */
     @PostMapping("create")
-    public void postAssociation(@RequestBody Association newAssociation){
+    public boolean postAssociation(@RequestBody Association newAssociation){
+        try {
         associationService.addAssociation(newAssociation);
+        return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**
@@ -58,7 +63,7 @@ public class AssociationController {
      * @param association
      */
     @PutMapping("edit/{id}")
-    @PreAuthorize(("hasRole('president')"))
+//    @PreAuthorize(("hasRole('president')"))
     public void updateAssociation(@PathVariable("id") Integer id, @RequestBody Association association) {
     	Optional<Association> oAssociation = associationService.getOneAssociation(id);
     	if(oAssociation.isPresent()) {
