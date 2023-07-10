@@ -1,6 +1,6 @@
 package sportinterest.article;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.*;
 
@@ -20,6 +20,7 @@ public class Article {
 	private Association association;
 	@ManyToOne
 	private User author;
+	private Date creationDate;
 	
 	public Article() {
 		
@@ -80,5 +81,13 @@ public class Article {
 	
 	public void setAuthor(User author) {
 		this.author = author;
+	}
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date date) {
+		this.creationDate = date;
 	}
 }

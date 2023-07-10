@@ -1,6 +1,7 @@
 package sportinterest.article;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +39,7 @@ public class ArticleService {
 	 * @param article
 	 */
 	public void addArticle(Article article) {
-
+		article.setCreationDate(new Date());
 		articleRepository.save(article);
 	}
 

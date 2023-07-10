@@ -1,6 +1,7 @@
 package sportinterest.event;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class EventService {
 	 * @param event
 	 */
 	public void addEvent(Event event) {
-
+		event.setCreationDate(new Date());
 		eventRepository.save(event);
 	}
 
@@ -48,8 +49,8 @@ public class EventService {
 
 	/**
 	 * Get events by associationid and restricted type
-	 * @param restricted
-	 * @param association id
+	 * @param restricted type
+	 * @param id association
 	 * @return
 	 */
 	public List<Event> getEventsByRestrictedAndAssociationId(Boolean restricted, Integer id) {
@@ -133,14 +134,5 @@ public class EventService {
 	public List<Event> findAllByRestrictedFalse() {
 		return eventRepository.findAllEventByRestrictedIsFalse();
 }
-
-	/**
-	 * Get all public events by association id
-	 * @param id
-	 * @return
-	 */
-	public List<Event> findAllByRestrictedFalseAndAssociationId(Integer id) {
-		return eventRepository.findAllEventByRestrictedIsFalseAndAssociationId(id);
-	}
 }
 

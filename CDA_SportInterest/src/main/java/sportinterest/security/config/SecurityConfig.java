@@ -41,7 +41,6 @@ public class SecurityConfig {
             .requestMatchers("user/mailTaken/*").permitAll()
             .anyRequest()
             .authenticated()
-//            .permitAll()
             .and()
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

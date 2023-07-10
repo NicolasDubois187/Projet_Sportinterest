@@ -1,6 +1,6 @@
 package sportinterest.event;
 
-import java.sql.Date;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -28,6 +28,7 @@ public class Event {
 	private Association association;
     @OneToOne
 	private Report report;
+	private Date creationDate;
     
 	public Event() {
 		
@@ -109,5 +110,11 @@ public class Event {
 		this.report = report;
 	}
 	
+	public Date getCreationDate() {
+		return creationDate;
+	}
 
+	public void setCreationDate(Date date) {
+		this.creationDate = date;
+	}
 }

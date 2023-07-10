@@ -125,5 +125,4 @@ public class UserController {
     public boolean mailTaken(@PathVariable("mail") String mail) {
     	return userService.mailTaken(mail);
     }
-
 }

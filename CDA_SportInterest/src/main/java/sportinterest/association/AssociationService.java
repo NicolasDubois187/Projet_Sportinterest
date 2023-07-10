@@ -54,13 +54,18 @@ public class AssociationService {
 	}
 
 	/**
-	 * Update attributes of one association
-	 * @param id
-	 * @param association
+	 * Update one association
+	 * @param associationUpdated
+	 * @param existingAssociation
 	 */
-	public void updateAssociation(Integer id, Association association) {
-
-		associationRepository.save(association);
+	public void updateAssociation(Association associationUpdated, Association existingAssociation) {
+		if (associationUpdated.getDescription() != null && !associationUpdated.getDescription().equals(existingAssociation.getDescription())) {
+			existingAssociation.setDescription(associationUpdated.getDescription());
+		}
+		if (associationUpdated.getPresidentId() != 0 && associationUpdated.getPresidentId() != existingAssociation.getPresidentId()) {
+			existingAssociation.setPresidentId(associationUpdated.getPresidentId());
+		}
+		associationRepository.save(existingAssociation);
 	}
 
 	/**

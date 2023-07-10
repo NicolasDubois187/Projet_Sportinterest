@@ -67,16 +67,18 @@ public class UserService {
 	/**
 	 * Update one user by his id
 	 * @param newUser
-	 * @param existiongUser
+	 * @param existingUser
 	 */
-	public void updateUser(User newUser, User existiongUser) {
-		if ((newUser.getFirstname() != null) && newUser.getFirstname().equals(existiongUser.getFirstname()))
-			existiongUser.setFirstname(newUser.getFirstname());
-		if ((newUser.getLastname() != null) && newUser.getLastname().equals(existiongUser.getLastname()))
-			existiongUser.setLastname(newUser.getLastname());
+	public void updateUser(User newUser, User existingUser) {
+		if ((newUser.getFirstname() != null) && !newUser.getFirstname().equals(existingUser.getFirstname()))
+			existingUser.setFirstname(newUser.getFirstname());
+		if ((newUser.getLastname() != null) && !newUser.getLastname().equals(existingUser.getLastname()))
+			existingUser.setLastname(newUser.getLastname());
 		if (newUser.getAssociation() != null)
-			existiongUser.setAssociation(newUser.getAssociation());
-		userRepository.save(existiongUser);
+			existingUser.setAssociation(newUser.getAssociation());
+		if ((newUser.getRole() != null ) && !newUser.getRole().equals(existingUser.getRole()))
+			existingUser.setRole(newUser.getRole());
+		userRepository.save(existingUser);
 	}
 
 	/**
@@ -107,6 +109,11 @@ public class UserService {
 
 	}
 
+	/**
+	 * Check if a mail is already taken
+	 * @param mail
+	 * @return
+	 */
 	public boolean mailTaken(String mail) {
 		Optional<User> oUser = userRepository.findByMail(mail);
 		return oUser.isPresent();

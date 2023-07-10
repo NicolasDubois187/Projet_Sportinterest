@@ -62,15 +62,10 @@ public class AssociationController {
      * @param id
      * @param association
      */
-    @PutMapping("edit/{id}")
-//    @PreAuthorize(("hasRole('president')"))
-    public void updateAssociation(@PathVariable("id") Integer id, @RequestBody Association association) {
-    	Optional<Association> oAssociation = associationService.getOneAssociation(id);
-    	if(oAssociation.isPresent()) {
-    
-    		associationService.updateAssociation(id, association);
-    	
-    	}
+    @PutMapping("edit")
+    public void updateAssociation(@RequestBody Association associationUpdated) {
+    	Optional<Association> oAssociation = associationService.getOneAssociation(associationUpdated.getId());
+        oAssociation.ifPresent(association -> associationService.updateAssociation(associationUpdated, association));
     }
 
     /**
