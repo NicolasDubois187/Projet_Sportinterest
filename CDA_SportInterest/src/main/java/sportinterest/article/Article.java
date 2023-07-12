@@ -14,7 +14,7 @@ public class Article {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	private Date date;
+	@Column(length = 1000)
 	private String description;
 	@ManyToOne
 	private Association association;
@@ -24,15 +24,6 @@ public class Article {
 	
 	public Article() {
 		
-	}
-	
-	public Article(int id, String name, Date date, String description, Association association, User author) {
-		this.id = id;
-		this.name = name;
-		this.date = date;
-		this.description = description;
-		this.association = association;
-		this.author = author;
 	}
 
 	public int getId() {
@@ -49,14 +40,6 @@ public class Article {
 	
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public Date getDate() {
-		return date;
-	}
-	
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	
 	public String getDescription() {
