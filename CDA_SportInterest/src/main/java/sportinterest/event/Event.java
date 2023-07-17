@@ -28,7 +28,7 @@ public class Event {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
-	@Column(length = 1000)
+	@Column(length = 5000)
 	private String description;
 	private Timestamp date;
 	private String address;

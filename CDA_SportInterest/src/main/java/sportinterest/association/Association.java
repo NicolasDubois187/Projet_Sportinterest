@@ -11,6 +11,7 @@ public class Association {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	@Column(length = 5000)
 	private String description;
 	private int presidentId;
 
