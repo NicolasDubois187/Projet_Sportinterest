@@ -9,6 +9,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import sportinterest.security.token.Token;
+import sportinterest.security.token.TokenRepository;
 
 
 @Service
@@ -16,6 +18,8 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	TokenRepository tokenRepository;
 
 	/**
 	 * Get all users
@@ -86,6 +90,14 @@ public class UserService {
 	 * @param id
 	 */
 	public void deleteUser(Integer id) {
+		List<Token> tokens = tokenRepository.findAllByUserId(id);
+
+		for (Token token : tokens) {
+			token.setUser(null);
+			token.setRevoked(true);
+			tokenRepository.save(token);
+		}
+
 		userRepository.deleteById(id);
 	}
 
