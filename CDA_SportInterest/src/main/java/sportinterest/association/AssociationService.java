@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.apache.catalina.Store;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import sportinterest.user.ERole;
 import sportinterest.user.User;
@@ -19,6 +22,8 @@ public class AssociationService {
 	AssociationRepository associationRepository;
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	UserService userService;
 
 
 	/**
@@ -35,12 +40,20 @@ public class AssociationService {
 	 */
 	public void addAssociation(Association association) {
 
-		User president = userRepository.findById(association.getPresidentId()).isPresent() ? userRepository.findById(association.getPresidentId()).get() : null;
-		assert president != null;
-		president.setRole(ERole.ADMIN);
-
 		associationRepository.save(association);
-		userRepository.save(president);
+
+//		Object test = (UserDetails) ((SecurityContext) SecurityContextHolder.getContext()).getAuthentication().getPrincipal();
+//
+//		try {
+//			User president = (User) test;
+//			assert president != null;
+//			president.setRole(ERole.ADMIN);
+//
+//			associationRepository.save(association);
+//			userRepository.save((User) president);
+//		} catch (Exception e) {
+//			System.out.println("Error while adding association");
+//		}
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package sportinterest.event;
 
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class EventService {
 	 * @param event
 	 */
 	public void addEvent(Event event) {
-		event.setCreationDate(new Date());
+		event.setCreationDate(new Timestamp(new Date().getTime()));
 		eventRepository.save(event);
 	}
 

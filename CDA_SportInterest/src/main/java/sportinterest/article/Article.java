@@ -1,12 +1,21 @@
 package sportinterest.article;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import jakarta.persistence.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import sportinterest.association.Association;
 import sportinterest.user.User;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Article {
 
@@ -20,57 +29,5 @@ public class Article {
 	private Association association;
 	@ManyToOne
 	private User author;
-	private Date creationDate;
-	
-	public Article() {
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public Association getAssociation() {
-		return association;
-	}
-	
-	public void setAssociation(Association association) {
-		this.association = association;
-	}
-	
-	public User getAuthor() {
-		return author;
-	}
-	
-	public void setAuthor(User author) {
-		this.author = author;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date date) {
-		this.creationDate = date;
-	}
+	private Timestamp creationDate;
 }
