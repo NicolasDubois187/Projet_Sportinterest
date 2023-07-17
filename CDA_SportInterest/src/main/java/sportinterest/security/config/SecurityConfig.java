@@ -38,7 +38,6 @@ public class SecurityConfig {
             .authorizeHttpRequests()
             .requestMatchers("/auth/**").permitAll()
             .requestMatchers("association/associations").permitAll()
-            .requestMatchers("association/create").permitAll()
             .requestMatchers("user/mailTaken/*").permitAll()
             .requestMatchers("association/name/*").permitAll()
             .anyRequest()

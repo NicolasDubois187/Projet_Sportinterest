@@ -43,7 +43,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (request.getServletPath().contains("/auth")
                 || request.getServletPath().contains("association/associations")
-                || request.getServletPath().contains("association/create")
                 || request.getServletPath().contains("association/name")
                 || request.getServletPath().contains("user/mailTaken")
         ) {

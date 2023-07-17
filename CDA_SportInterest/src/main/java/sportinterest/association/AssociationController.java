@@ -31,13 +31,8 @@ public class AssociationController {
      * @param newAssociation
      */
     @PostMapping("create")
-    public boolean postAssociation(@RequestBody Association newAssociation){
-        try {
+    public void postAssociation(@RequestBody Association newAssociation){
         associationService.addAssociation(newAssociation);
-        return true;
-        } catch (Exception e) {
-            return false;
-        }
     }
 
     /**

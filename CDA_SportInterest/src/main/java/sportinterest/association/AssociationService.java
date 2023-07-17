@@ -39,21 +39,22 @@ public class AssociationService {
 	 * @param association
 	 */
 	public void addAssociation(Association association) {
+		try {
+			associationRepository.save(association);
 
-		associationRepository.save(association);
+			Association savedAsso = associationRepository.findByName(association.getName()).get();
 
-//		Object test = (UserDetails) ((SecurityContext) SecurityContextHolder.getContext()).getAuthentication().getPrincipal();
-//
-//		try {
-//			User president = (User) test;
-//			assert president != null;
-//			president.setRole(ERole.ADMIN);
-//
-//			associationRepository.save(association);
-//			userRepository.save((User) president);
-//		} catch (Exception e) {
-//			System.out.println("Error while adding association");
-//		}
+			Object test = (UserDetails) ((SecurityContext) SecurityContextHolder.getContext()).getAuthentication().getPrincipal();
+			User president = (User) test;
+			assert president != null;
+			president.setRole(ERole.ADMIN);
+			president.setAssociation(savedAsso);
+
+
+			userRepository.save((User) president);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
