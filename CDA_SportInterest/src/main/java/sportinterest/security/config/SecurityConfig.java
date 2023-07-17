@@ -40,6 +40,7 @@ public class SecurityConfig {
             .requestMatchers("association/associations").permitAll()
             .requestMatchers("association/create").permitAll()
             .requestMatchers("user/mailTaken/*").permitAll()
+            .requestMatchers("association/name/*").permitAll()
             .anyRequest()
             .authenticated()
             .and()
